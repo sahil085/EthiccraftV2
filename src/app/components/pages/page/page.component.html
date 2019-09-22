@@ -1,0 +1,14 @@
+<nb-layout [windowMode]="true">
+  <nb-layout-header [fixed]="true">
+    <app-header></app-header>
+  </nb-layout-header>
+  <nb-sidebar>
+    <app-side-nav></app-side-nav>
+  </nb-sidebar>
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+  <nb-layout-footer>
+    <app-footer ></app-footer>
+  </nb-layout-footer>
+</nb-layout>

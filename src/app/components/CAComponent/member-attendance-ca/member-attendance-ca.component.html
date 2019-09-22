@@ -1,0 +1,39 @@
+<div class="row" >
+  <div class="col-md-12" >
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Attendance</h3>
+      </div>
+      <div class="ibox-content">
+        <table id="viewMemberAttendanceTable" class="table table-responsive table-striped">
+          <thead>
+          <tr>
+            <th>Member Name</th>
+            <th>Email</th>
+            <th>Mobile No.</th>
+            <th>College</th>
+            <th>City</th>
+            <th>Attendance State</th>
+            <th class="text-center">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="p-h-md">
+            <td>Ravi Garg</td>
+            <td>ravigarg@gmail.com</td>
+            <td>9999998877</td>
+            <td>G.L Bjaj</td>
+            <td>Ghaziabad</td>
+            <td>Present</td>
+            <td class="text-center">
+              <button class="btn btn-primary" (click)="markAttendance('PRESENT','memberObject')">Present</button>
+              <button class="btn btn-danger" (click)="markAttendance('PRESENT','memberObject')">Absent</button>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div >
+</div>

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>View College</h3>
+      </div>
+      <div class="ibox-content">
+        <table id="viewCollegeTable" class="table table-responsive table-striped">
+          <thead>
+          <tr>
+            <th>College Name/th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Faculty</th>
+            <th>Referrer Name</th>
+            <th>Referrer Contact</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let college of collegeList" class="p-h-md">
+            <td>{{college.collegeName}}</td>
+            <td>{{college.address}}</td>
+            <td>{{college.city}}</td>
+            <td>{{college.faculty}}</td>
+            <td>{{college.referencePersonName}}</td>
+            <td>{{college.referencePersonContact}}</td>
+            <td>
+              <a title="Delete activity"><i class="fa fa-trash p-xs"></i></a>
+              <a title="Approve Activity"><i class="fa fa-check p-xs"></i></a>
+              <a title="Decline Activity"><i class="fa fa-times p-xs"></i></a>
+              <a routerLink="/admin/college/edit/{{college.id}}" title="Edit Activity"><i class="fa fa-pencil p-xs"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

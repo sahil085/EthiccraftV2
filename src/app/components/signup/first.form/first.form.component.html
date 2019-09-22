@@ -1,0 +1,81 @@
+<form [style.fontSize.px]="16" [formGroup]="firstFormGroup">
+
+    <input
+      nbInput
+      placeholder="First Name"
+      formControlName="firstName"
+      required>
+    <div *ngIf="firstFormGroup.get('firstName').hasError('required')">
+      Please enter your first name
+    </div>
+
+
+    <input
+      nbInput
+      placeholder="Middle Name"
+      formControlName="middleName"
+    >
+
+
+    <input
+      nbInput
+      placeholder="Last Name"
+      formControlName="lastName"
+      required>
+    <div *ngIf="firstFormGroup.get('lastName').hasError('required')">
+      Please enter your last name
+    </div>
+
+  <br/>
+
+    <nb-select placeholder="Gender" formControlName="gender" required>
+      <nb-option [value]="'Male'">Male</nb-option>
+      <nb-option [value]="'Female'">Female</nb-option>
+    </nb-select>
+    <div *ngIf="firstFormGroup.get('gender').hasError('required')">
+      Please select your gender
+    </div>
+
+  <br/>
+
+    <input
+      nbInput
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+      required>
+    <div *ngIf="firstFormGroup.get('email').hasError('required')">
+      Please enter your email
+    </div>
+    <div *ngIf="firstFormGroup.get('email').hasError('email')">
+      Please enter correct email
+    </div>
+
+  <br/>
+
+    <input
+      nbInput
+      placeholder="Password"
+      formControlName="password"
+      type="password"
+      required>
+    <div *ngIf="firstFormGroup.get('password').hasError('required')">
+      Please enter your password
+    </div>
+
+  <br/>
+
+    <input
+      nbInput
+      placeholder="Confirm Password"
+      formControlName="confirm"
+      type="password"
+      required>
+    <div *ngIf="firstFormGroup.get('confirm').hasError('required')">
+      Please confirm your password
+    </div>
+    <div *ngIf="firstFormGroup.hasError('notSame')">
+      Password do not match {{firstFormGroup.hasError('notSame')}}
+    </div>
+
+</form>

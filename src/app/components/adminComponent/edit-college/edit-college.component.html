@@ -1,0 +1,91 @@
+<form [style.fontSize.px]="16" [formGroup]="collegeFormGroup">
+  <nb-card>
+      <input
+        nbInput
+        placeholder="College Name"
+        formControlName="collegeName"
+        [(ngModel)]="initialCollegeData.collegeName"
+        required>
+
+
+      <input
+        nbInput
+        placeholder="College Abbreviation"
+        formControlName="collegeAbbreviation"
+        [(ngModel)]="initialCollegeData.collegeAbbreviation"
+        required
+      >
+
+    <br/>
+      <input
+        nbInput
+        placeholder="University Name"
+        formControlName="universityName"
+        [(ngModel)]="initialCollegeData.universityName"
+        required>
+
+    <br/>
+      <input
+        nbInput
+        placeholder="Address"
+        formControlName="address"
+        [(ngModel)]="initialCollegeData.address"
+        required>
+
+    <br/>
+
+      <input
+        nbInput
+        placeholder="City"
+        formControlName="city"
+        [(ngModel)]="initialCollegeData.city"
+        required>
+
+
+      <input
+        nbInput
+        placeholder="State"
+        formControlName="state"
+        [(ngModel)]="initialCollegeData.state"
+        required>
+
+    <br/>
+
+      <input
+        nbInput
+        placeholder="Comments"
+        formControlName="comments"
+        [(ngModel)]="initialCollegeData.comments"
+        required>
+
+    <br/>
+
+      <input
+        nbInput
+        placeholder="Faculty"
+        formControlName="faculty"
+        [(ngModel)]="initialCollegeData.faculty"
+        required>
+
+
+      <input
+        nbInput
+        placeholder="Referrer Name"
+        formControlName="referencePersonName"
+        [(ngModel)]="initialCollegeData.referencePersonName"
+        required>
+
+
+      <input
+        nbInput
+        placeholder="Referrer Contact"
+        formControlName="referencePersonContact"
+        width="100%"
+        [(ngModel)]="initialCollegeData.referencePersonContact"
+        required>
+
+    <div>
+      <button nbButton (click)="submitForm()">Save Details</button>
+    </div>
+  </nb-card>
+</form>

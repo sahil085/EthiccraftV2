@@ -1,0 +1,102 @@
+<form [style.fontSize.px]="16" [formGroup]="secondFormGroup">
+
+    <input type="number"
+           maxlength="10"
+           nbInput
+           placeholder="Contact"
+           formControlName="mobileNumber"
+           required>
+    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('required')">
+      Please enter your mobile number
+    </div>
+    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('pattern')">
+      Invalid Number
+    </div>
+
+
+    <input type="number"
+           maxlength="10"
+           nbInput
+           placeholder="Whatsapp"
+           formControlName="whatsappNumber"
+    >
+    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('pattern')">
+      Invalid Number
+    </div>
+
+  <div formGroupName="presentAddress">
+    <h5>Present Address</h5>
+
+      <input
+        nbInput
+        placeholder="Address"
+        formControlName="address"
+        required>
+      <div *ngIf="secondFormGroup.get('presentAddress').get('address').hasError('required')">
+        Please enter your Address
+      </div>
+
+
+      <nb-select placeholder="Country" formControlName="country" required>
+        <nb-option selected value="India">India</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('presentAddress').get('country').hasError('required')">
+        Please enter your country
+      </div>
+
+
+      <nb-select (selectionChange)="onPresentStateChange($event)" placeholder="State" formControlName="state" required>
+        <nb-option *ngFor="let state of presentStateList" [value]="state.id">{{state.name}}</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
+        Please enter your present state
+      </div>
+
+
+      <nb-select placeholder="City" formControlName="city" required>
+        <nb-option *ngFor="let city of presentCityList" [value]="city.name">{{city.name}}</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
+        Please enter your city
+      </div>
+
+  </div>
+  <div formGroupName="permanentAddress">
+    <h5>Permanent Address</h5>
+
+      <input
+        nbInput
+        placeholder="Address"
+        formControlName="address"
+        required>
+      <div *ngIf="secondFormGroup.get('permanentAddress').get('address').hasError('required')">
+        Please enter your address
+      </div>
+
+
+      <nb-select placeholder="Country" formControlName="country" required>
+        <nb-option selected value="India">India</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
+        Please enter your country
+      </div>
+
+
+      <nb-select (selectionChange)="onPermanentStateChange($event)" placeholder="State" formControlName="state"
+                  required>
+        <nb-option *ngFor="let state of permanentStateList" [value]="state.id">{{state.name}}</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
+        Please enter your state
+      </div>
+
+
+      <nb-select placeholder="City" formControlName="city" required>
+        <nb-option *ngFor="let city of permanentCityList" [value]="city.name">{{city.name}}</nb-option>
+      </nb-select>
+      <div *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
+        Please enter your city
+      </div>
+
+  </div>
+</form>

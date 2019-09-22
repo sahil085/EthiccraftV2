@@ -1,0 +1,106 @@
+<form [style.fontSize.px]="16" [formGroup]="collegeFormGroup">
+  <nb-card>
+    <nb-card-body>
+
+      <input
+        nbInput fullWidth shape="semi-round"
+        placeholder="College Name"
+        formControlName="collegeName"
+        required>
+      <div *ngIf="collegeFormGroup.get('collegeName').hasError('required')">
+        Please enter the College Name
+      </div>
+
+      <input
+        nbInput fullWidth shape="semi-round"
+        placeholder="College Abbreviation"
+        formControlName="collegeAbbreviation"
+        required
+      >
+      <div *ngIf="collegeFormGroup.get('collegeAbbreviation').hasError('required')">
+        Please enter the College Abbreviation
+      </div>
+
+      <br/>
+
+        <input
+          nbInput fullWidth shape="semi-round"
+          placeholder="University Name"
+          formControlName="universityName"
+          required>
+        <div *ngIf="collegeFormGroup.get('universityName').hasError('required')">
+          Please enter the University Name
+        </div>
+
+        <br/>
+
+          <input
+            nbInput fullWidth shape="semi-round"
+            placeholder="Address"
+            formControlName="address"
+            required>
+          <div *ngIf="collegeFormGroup.get('address').hasError('required')">
+            Please enter the Address
+          </div>
+
+          <br/>
+
+          <nb-select (selectionChange)="onStateChange($event)" placeholder="State" formControlName="state" required>
+            <nb-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</nb-option>
+          </nb-select>
+          <div *ngIf="collegeFormGroup.get('state').hasError('required')">
+            Please enter your present state
+          </div>
+
+
+          <nb-select placeholder="City" formControlName="city" required>
+            <nb-option *ngFor="let city of cityList" [value]="city.name">{{city.name}}</nb-option>
+          </nb-select>
+          <div *ngIf="collegeFormGroup.get('city').hasError('required')">
+            Please enter your city
+          </div>
+
+          <br/>
+            <input
+              nbInput fullWidth shape="semi-round"
+              placeholder="Comments"
+              formControlName="comments"
+            >
+
+            <br/>
+
+            <input
+              nbInput fullWidth shape="semi-round"
+              placeholder="Faculty Name"
+              formControlName="faculty"
+              required>
+            <div *ngIf="collegeFormGroup.get('faculty').hasError('required')">
+              Please enter the Faculty Name
+            </div>
+
+
+            <input
+              nbInput fullWidth shape="semi-round"
+              placeholder="Referrer Name"
+              formControlName="referencePersonName"
+              required>
+            <div *ngIf="collegeFormGroup.get('referencePersonName').hasError('required')">
+              Please enter the Referrer Name
+            </div>
+
+            <input
+              nbInput fullWidth shape="semi-round"
+              placeholder="Referrer Contact"
+              formControlName="referencePersonContact"
+              width="100%"
+              required>
+            <div *ngIf="collegeFormGroup.get('referencePersonContact').hasError('required')">
+              Please enter the Referrer Contact
+            </div>
+
+            <div>
+              <button nbButton (click)="submitForm()" style="background-color: #1ab394; color: white;">Add College</button>
+            </div>
+    </nb-card-body>
+  </nb-card>
+</form>

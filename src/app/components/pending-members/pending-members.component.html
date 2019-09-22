@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h3>Pending Members</h3>
+      </div>
+      <div class="ibox-content">
+        <table id="viewPendingMemberTable" class="table table-responsive table-striped">
+          <thead>
+          <tr>
+            <th>Member Name</th>
+            <th>Email</th>
+            <th>Mobile No.</th>
+            <th>College</th>
+            <th>User Status</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tr class="p-h-md" *ngFor="let member of membersList">
+            <td>{{member.firstName}}  {{member.lastName}}</td>
+            <td>{{member.email}}</td>
+            <td>{{member.mobileNumber}}</td>
+            <td>{{member.college.collegeName}}</td>
+            <td *ngIf="member.memberApproved">Member</td>
+            <td *ngIf="!member.memberApproved">User</td>
+            <td>
+              <a *ngIf="member.memberApproved" (click)="approveOrDeclineMember(member,false)"
+                 title="Decline membership"><i
+                class="fa fa-trash p-xs"></i></a>
+              <a *ngIf="!member.memberApproved" (click)="approveOrDeclineMember(member,true)"
+                 title="Approve Member"><i class="fa fa-pencil p-xs"></i></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-11">
+    <div class="ibox-content">
+      <div class="row">
+        <div class="col-md-12"><h3 class="m-t-none m-b">Create Activity</h3>
+          <form role="form" [formGroup]="editActivityForm" class="example-container" #f="ngForm">
+            <div class="form-group"><label>Activity Name</label> <input type="text" placeholder="Enter Activity name" class="form-control"
+                                                                        required formControlName="name"></div>
+            <span class="badge-danger" *ngIf="f.submitted">
+              <span *ngIf="editActivityForm.get('name').hasError('required')">Activity name is required</span>
+            </span>
+            <div class="form-group"><label>Activity Description</label>
+              <textarea type="text" placeholder="Enter Activity description" class="form-control"
+                        required formControlName="description"></textarea></div>
+            <span class="badge-danger" *ngIf="f.submitted">
+              <span *ngIf="editActivityForm.get('description').hasError('required')">Activity description is required</span>
+            </span>
+            <div class="form-group"><label>Activity Type</label>
+              <select class="form-control" formControlName="type">
+                <option selected disabled>
+                  Select Activity Type
+                </option>
+                <option value="External">
+                  External
+                </option>
+                <option value="Internal">
+                  Internal
+                </option>
+              </select>
+            </div>
+            <span class="badge-danger" *ngIf="f.submitted">
+              <span *ngIf="editActivityForm.get('type').hasError('required')">Activity Type is required</span>
+            </span>
+            <div class="form-group"><label>Start Date</label> <input type="number" min="0" max="8"
+                                                                     placeholder="Enter Start Date"
+                                                                     class="form-control" required
+                                                                     formControlName="startDate"></div>
+            <span class="badge-danger" *ngIf="f.submitted">
+              <span
+                *ngIf="editActivityForm.get('startDate').hasError('required')">Start Date has Errors</span>
+            </span>
+            <div class="form-group"><label>End Date</label> <input type="number" min="0" max="59"
+                                                                   placeholder="Enter End Date"
+                                                                   class="form-control" required
+                                                                   formControlName="endDate"></div>
+            <span class="badge-danger" *ngIf="f.submitted">
+              <span
+                *ngIf="editActivityForm.get('endDate').hasError('required')">End Date is required</span>
+            </span>
+            <div class="form-group"><label>College</label> <input type="text" placeholder="Enter College Name"
+                                                                  class="form-control"
+                                                                  formControlName="colleges"></div>
+            <div>
+               <span class="badge-danger" *ngIf="f.submitted">
+              <span
+                *ngIf="editActivityForm.get('colleges').hasError('required')">Please select atleast one college</span>
+            </span>
+              <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" (click)="edit()">
+                <strong>Update</strong></button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
