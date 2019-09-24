@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../../services/security/authentication.s
 import {NbSidebarService, NbThemeService} from '@nebular/theme';
 import {map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -37,7 +38,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private authService: AuthenticationService,
-              private themeService: NbThemeService) { }
+              private themeService: NbThemeService,
+              private router: Router
+              ) { }
 
   ngOnInit() {
 
@@ -61,5 +64,9 @@ export class HeaderComponent implements OnInit {
 
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
+  }
+
+  navigateHome() {
+    this.router.navigateByUrl('');
   }
 }

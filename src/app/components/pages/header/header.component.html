@@ -3,11 +3,12 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">Ethic-<span>craft</span></a>
+    <a class="logo" href="#" (click)="navigateHome()">Ethiccraft</a>
   </div>
-  <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
-    <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
-  </nb-select>
-  <button class="float-right" nbButton (click)="logout()">Logout</button>
-
+  <div>
+    <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
+      <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
+    </nb-select>
+    <button class="float-right" nbButton (click)="logout()">Logout</button>
+  </div>
 </div>

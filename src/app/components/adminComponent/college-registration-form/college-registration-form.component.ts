@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AppComponent} from '../../../app.component';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import csc from 'country-state-city';
 import {CollegeService} from '../../../services/college.service';
+import alert from 'sweetalert2';
+import {AppUrl} from '../../../constants/AppUrl';
 
 
 @Component({
@@ -22,19 +23,20 @@ export class CollegeRegistrationFormComponent implements OnInit {
   state: string;
   comments: string;
   faculty: string;
-  referencePersonName: string;
-  referencePersonContact: number;
   stateList: any[] = [];
   cityList: any[] = [];
+  name: string;
+  designation: string;
+  contact: string;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private _formBuilder: FormBuilder,
+              private formBuilder: FormBuilder,
               private collegeService: CollegeService
   ) { }
 
   ngOnInit() {
-    this.collegeFormGroup = this._formBuilder.group({
+    this.collegeFormGroup = this.formBuilder.group({
       collegeName: [this.collegeName, Validators.required],
       collegeAbbreviation: [this.collegeAbbreviation, Validators.required],
       universityName: [this.universityName, Validators.required],
@@ -43,50 +45,74 @@ export class CollegeRegistrationFormComponent implements OnInit {
       state: [this.state, Validators.required],
       comments: [this.comments],
       faculty: [this.faculty, Validators.required],
-      referencePersonName: [this.referencePersonName, Validators.required],
-      referencePersonContact: [this.referencePersonContact, Validators.required]
+      referenceList: this.formBuilder.array([this.createItem()], Validators.required)
     });
 
     this.stateList = csc.getStatesOfCountry('101');
 
   }
 
-  onStateChange(event) {
-    this.cityList = csc.getCitiesOfState('' + event.value);
+  createItem = () => {
+    return this.formBuilder.group({
+      name: [this.name, Validators.required],
+      designation: [this.designation, Validators.required],
+      contact: [this.contact, Validators.required]
+    });
+  }
+
+  get formArr() {
+    return this.collegeFormGroup.get('referenceList') as FormArray;
+  }
+
+  addItem = () => {
+    this.formArr.push(this.createItem());
+  }
+
+  deleteRow = (index: number) => {
+    this.formArr.removeAt(index);
+  }
+
+  onStateChange = (value) => {
+    this.cityList = csc.getCitiesOfState('' + value);
+    this.collegeFormGroup.get('city').patchValue(null);
   }
 
   submitForm = () => {
-    console.log(this.collegeFormGroup.value);
     if (this.collegeFormGroup.valid) {
+      this.collegeFormGroup.value.state = this.stateList[this.stateList.findIndex(
+        (elem) => elem.id === this.collegeFormGroup.value.state)].name;
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
-            // AppComponent.showToaster(data['errorMessage'], 'error');
+            this.showToaster(data['errorMessage'], 'error');
           } else {
-            // AppComponent.showToaster(data['successMessage'], 'success');
+            this.showToaster(data['successMessage'], 'success');
+            this.router.navigate([AppUrl.VIEW_COLLEGE_ADMIN]);
           }
         }
         ,
         err => {
           if (err.status === 400) {
-            // AppComponent.showToaster('Validation failed', 'error');
+            this.showToaster('Validation failed', 'error');
 
           } else {
-            // AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+            this.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
 
           }
         }
       );
 
+    } else {
+      this.collegeFormGroup.markAllAsTouched();
     }
   }
 
 
   showToaster = (message, type) => {
-  //   Swal({
-  //     title: message,
-  //     type: type,
-  //     timer: 1500
-  //   });
+    alert.fire({
+      title: message,
+      type: type,
+      timer: 1500
+    });
   }
 }

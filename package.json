@@ -26,6 +26,7 @@
     "country-state-city": "^1.0.0",
     "eva-icons": "^1.1.1",
     "rxjs": "~6.4.0",
+    "sweetalert2": "^8.17.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
