@@ -144,7 +144,6 @@
           <div
             *ngIf="collegeFormGroup.get('faculty').invalid && (collegeFormGroup.get('faculty').dirty || collegeFormGroup.get('faculty').touched)"
             class="validation-msg">
-            <div class="col-form-label"></div>
             <div *ngIf="collegeFormGroup.get('faculty').hasError('required')">
               Please enter the Faculty Name
             </div>
@@ -213,6 +212,9 @@
                 class="validation-msg">
                 <div *ngIf="formArr.controls[i].get('contact').hasError('required')">
                   Please enter the Contact
+                </div>
+                <div *ngIf="formArr.controls[i].get('contact').hasError('pattern')">
+                  Please enter a valid Contact
                 </div>
               </div>
             </div>

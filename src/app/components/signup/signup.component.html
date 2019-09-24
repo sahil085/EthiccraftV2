@@ -2,30 +2,24 @@
   <nb-layout-header>
     Register
   </nb-layout-header>
-  <nb-layout-column>
+  <nb-layout-column [style.padding]="router.url === '/page/register' ? '0' : null">
     <nb-card>
       <nb-card-body>
-        <nb-stepper [linear]="false" #stepper>
+        <nb-stepper [linear]="true" #stepper>
           <nb-step label="Account Information" [stepControl]="firstFormGroup">
             <app-first-form [firstFormGroup]="firstFormGroup"></app-first-form>
-            <button nbButton nbStepperPrevious>prev</button>
-            <button nbButton nbStepperNext>next</button>
           </nb-step>
           <nb-step label="Contact Details" [stepControl]="secondFormGroup">
             <app-second-form [secondFormGroup]="secondFormGroup"></app-second-form>
-            <button nbButton nbStepperPrevious>prev</button>
-            <button nbButton nbStepperNext>next</button>
           </nb-step>
           <nb-step label="College Details" [stepControl]="thirdFormGroup">
             <app-third-form [collegeList]="collegeList" [thirdFormGroup]="thirdFormGroup"></app-third-form>
-            <button nbButton nbStepperPrevious>prev</button>
-            <button nbButton nbStepperNext>next</button>
           </nb-step>
           <nb-step label="Done" [stepControl]="fourthFormGroup">
             <app-fourth-form [fourthFormGroup]="fourthFormGroup"></app-fourth-form>
             <button nbButton nbStepperPrevious>prev</button>
             <button nbButton (click)="stepper.reset()">Reset</button>
-            <button nbButton nbStepperNext>Sign Up</button>
+            <button nbButton (click)="submitForm()" nbStepperNext>Sign Up</button>
           </nb-step>
         </nb-stepper>
 

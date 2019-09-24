@@ -1,102 +1,204 @@
 <form [style.fontSize.px]="16" [formGroup]="secondFormGroup">
-
-    <input type="number"
-           maxlength="10"
-           nbInput
-           placeholder="Contact"
-           formControlName="mobileNumber"
-           required>
-    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('required')">
-      Please enter your mobile number
+  <div class="form-row">
+    <div class="col-form-label">
+      Contact
     </div>
-    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('pattern')">
-      Invalid Number
+    <div class="col-form-input">
+      <input type="number"
+             maxlength="10"
+             nbInput fullWidth
+             placeholder="Contact"
+             formControlName="mobileNumber"
+             required>
+      <div
+        *ngIf="secondFormGroup.get('mobileNumber').invalid && (secondFormGroup.get('mobileNumber').dirty || secondFormGroup.get('mobileNumber').touched)"
+        class="validation-msg">
+        <div *ngIf="secondFormGroup.get('mobileNumber').hasError('required')">
+          Please enter your mobile number
+        </div>
+        <div *ngIf="secondFormGroup.get('mobileNumber').hasError('pattern')">
+          Invalid Number
+        </div>
+      </div>
     </div>
+  </div>
 
-
-    <input type="number"
-           maxlength="10"
-           nbInput
-           placeholder="Whatsapp"
-           formControlName="whatsappNumber"
-    >
-    <div *ngIf="secondFormGroup.get('mobileNumber').hasError('pattern')">
-      Invalid Number
+  <div class="form-row">
+    <div class="col-form-label">
+      Whatsapp
     </div>
-
+    <div class="col-form-input">
+      <input type="number"
+             maxlength="10"
+             nbInput fullWidth
+             placeholder="Whatsapp"
+             formControlName="whatsappNumber"
+      >
+      <div
+        *ngIf="secondFormGroup.get('whatsappNumber').invalid && (secondFormGroup.get('whatsappNumber').dirty || secondFormGroup.get('whatsappNumber').touched)"
+        class="validation-msg">
+        <div *ngIf="secondFormGroup.get('whatsappNumber').hasError('pattern')">
+          Invalid Number
+        </div>
+      </div>
+    </div>
+  </div>
   <div formGroupName="presentAddress">
     <h5>Present Address</h5>
-
-      <input
-        nbInput
-        placeholder="Address"
-        formControlName="address"
-        required>
-      <div *ngIf="secondFormGroup.get('presentAddress').get('address').hasError('required')">
-        Please enter your Address
+    <div class="form-row">
+      <div class="col-form-label">
+        House No.
       </div>
-
-
-      <nb-select placeholder="Country" formControlName="country" required>
-        <nb-option selected value="India">India</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('presentAddress').get('country').hasError('required')">
-        Please enter your country
+      <div class="col-form-input">
+        <input
+          nbInput fullWidth
+          placeholder="Address"
+          formControlName="address"
+          required>
+        <div
+          *ngIf="secondFormGroup.get('presentAddress').get('address').invalid && (secondFormGroup.get('presentAddress').get('address').dirty || secondFormGroup.get('presentAddress').get('address').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('presentAddress').get('address').hasError('required')">
+            Please enter your House No.
+          </div>
+        </div>
       </div>
-
-
-      <nb-select (selectionChange)="onPresentStateChange($event)" placeholder="State" formControlName="state" required>
-        <nb-option *ngFor="let state of presentStateList" [value]="state.id">{{state.name}}</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
-        Please enter your present state
+    </div>
+    <div class="form-row">
+      <div class="col-form-label">
+        Country
       </div>
-
-
-      <nb-select placeholder="City" formControlName="city" required>
-        <nb-option *ngFor="let city of presentCityList" [value]="city.name">{{city.name}}</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
-        Please enter your city
+      <div class="col-form-input">
+        <nb-select placeholder="Country" formControlName="country" required>
+          <nb-option selected value="India">India</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('presentAddress').get('country').invalid && (secondFormGroup.get('presentAddress').get('country').dirty || secondFormGroup.get('presentAddress').get('country').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('presentAddress').get('country').hasError('required')">
+            Please enter your country
+          </div>
+        </div>
       </div>
-
+    </div>
+    <div class="form-row">
+      <div class="col-form-label">
+        State
+      </div>
+      <div class="col-form-input">
+        <nb-select (selectedChange)="onPresentStateChange($event)" placeholder="State" formControlName="state"
+                   required>
+          <nb-option *ngFor="let state of presentStateList" [value]="state.id">{{state.name}}</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('presentAddress').get('state').invalid && (secondFormGroup.get('presentAddress').get('state').dirty || secondFormGroup.get('presentAddress').get('state').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
+            Please enter your state
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-form-label">
+        City
+      </div>
+      <div class="col-form-input">
+        <nb-select placeholder="City" formControlName="city" required>
+          <nb-option *ngFor="let city of presentCityList" [value]="city.name">{{city.name}}</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('presentAddress').get('city').invalid && (secondFormGroup.get('presentAddress').get('city').dirty || secondFormGroup.get('presentAddress').get('city').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
+            Please enter your city
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <div formGroupName="permanentAddress">
     <h5>Permanent Address</h5>
-
-      <input
-        nbInput
-        placeholder="Address"
-        formControlName="address"
-        required>
-      <div *ngIf="secondFormGroup.get('permanentAddress').get('address').hasError('required')">
-        Please enter your address
+    <div class="form-row">
+      <div class="col-form-label">
+        House No.
       </div>
-
-
-      <nb-select placeholder="Country" formControlName="country" required>
-        <nb-option selected value="India">India</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
-        Please enter your country
+      <div class="col-form-input">
+        <input
+          nbInput fullWidth
+          placeholder="Address"
+          formControlName="address"
+          required>
+        <div
+          *ngIf="secondFormGroup.get('permanentAddress').get('address').invalid && (secondFormGroup.get('permanentAddress').get('address').dirty || secondFormGroup.get('permanentAddress').get('address').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('permanentAddress').get('address').hasError('required')">
+            Please enter your permanent House no.
+          </div>
+        </div>
       </div>
+    </div>
 
-
-      <nb-select (selectionChange)="onPermanentStateChange($event)" placeholder="State" formControlName="state"
-                  required>
-        <nb-option *ngFor="let state of permanentStateList" [value]="state.id">{{state.name}}</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
-        Please enter your state
+    <div class="form-row">
+      <div class="col-form-label">
+        Country
       </div>
-
-
-      <nb-select placeholder="City" formControlName="city" required>
-        <nb-option *ngFor="let city of permanentCityList" [value]="city.name">{{city.name}}</nb-option>
-      </nb-select>
-      <div *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
-        Please enter your city
+      <div class="col-form-input">
+        <nb-select placeholder="Country" formControlName="country" required>
+          <nb-option selected value="India">India</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('permanentAddress').get('country').invalid && (secondFormGroup.get('permanentAddress').get('country').dirty || secondFormGroup.get('permanentAddress').get('country').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
+            Please enter your country
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-form-label">
+        State
+      </div>
+      <div class="col-form-input">
+        <nb-select (selectedChange)="onPermanentStateChange($event)" placeholder="State" formControlName="state"
+                   required>
+          <nb-option *ngFor="let state of permanentStateList" [value]="state.id">{{state.name}}</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('permanentAddress').get('state').invalid && (secondFormGroup.get('permanentAddress').get('state').dirty || secondFormGroup.get('permanentAddress').get('state').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
+            Please enter your state
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-form-label">
+        City
+      </div>
+      <div class="col-form-input">
+        <nb-select placeholder="City" formControlName="city" required>
+          <nb-option *ngFor="let city of permanentCityList" [value]="city.name">{{city.name}}</nb-option>
+        </nb-select>
+        <div
+          *ngIf="secondFormGroup.get('permanentAddress').get('city').invalid && (secondFormGroup.get('permanentAddress').get('city').dirty || secondFormGroup.get('permanentAddress').get('city').touched)"
+          class="validation-msg">
+          <div *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
+            Please enter your city
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
   </div>
+  <button nbButton nbStepperPrevious>prev</button>
+  <button (click)="validateForm()" nbButton nbStepperNext>next</button>
 </form>

@@ -41,6 +41,11 @@ const routes: Routes = [
         data: {roles: Role.getAllRoles()}
       },
       {
+        path: 'register',
+        component: SignupComponent,
+        data: {roles: Role.getAllRoles()}
+      },
+      {
         path: 'registerCollege',
         component: CollegeRegistrationFormComponent,
         data: {roles: [Role.userRoles.ADMIN]}

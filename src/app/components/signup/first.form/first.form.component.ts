@@ -17,4 +17,12 @@ export class FirstFormComponent implements OnInit {
 
   }
 
+  validateForm = () => {
+    if (this.firstFormGroup.invalid) {
+      console.log('hello', this.firstFormGroup.invalid);
+      this.firstFormGroup.markAllAsTouched();
+    }
+    console.log(this.firstFormGroup.value);
+  }
+
 }

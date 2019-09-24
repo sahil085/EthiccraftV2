@@ -1,81 +1,140 @@
 <form [style.fontSize.px]="16" [formGroup]="firstFormGroup">
 
-    <input
-      nbInput
-      placeholder="First Name"
-      formControlName="firstName"
-      required>
-    <div *ngIf="firstFormGroup.get('firstName').hasError('required')">
-      Please enter your first name
+
+  <div class="form-row">
+    <div class="col-form-label">
+      First name
     </div>
-
-
-    <input
-      nbInput
-      placeholder="Middle Name"
-      formControlName="middleName"
-    >
-
-
-    <input
-      nbInput
-      placeholder="Last Name"
-      formControlName="lastName"
-      required>
-    <div *ngIf="firstFormGroup.get('lastName').hasError('required')">
-      Please enter your last name
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="First Name"
+        formControlName="firstName"
+        required>
+      <div
+        *ngIf="firstFormGroup.get('firstName').invalid && (firstFormGroup.get('firstName').dirty || firstFormGroup.get('firstName').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('firstName').hasError('required')">
+          Please enter your First Name
+        </div>
+      </div>
     </div>
-
-  <br/>
-
-    <nb-select placeholder="Gender" formControlName="gender" required>
-      <nb-option [value]="'Male'">Male</nb-option>
-      <nb-option [value]="'Female'">Female</nb-option>
-    </nb-select>
-    <div *ngIf="firstFormGroup.get('gender').hasError('required')">
-      Please select your gender
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Middle name
     </div>
-
-  <br/>
-
-    <input
-      nbInput
-      type="email"
-      placeholder="Email"
-      formControlName="email"
-      required>
-    <div *ngIf="firstFormGroup.get('email').hasError('required')">
-      Please enter your email
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Middle Name"
+        formControlName="middleName"
+      >
     </div>
-    <div *ngIf="firstFormGroup.get('email').hasError('email')">
-      Please enter correct email
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Last name
     </div>
-
-  <br/>
-
-    <input
-      nbInput
-      placeholder="Password"
-      formControlName="password"
-      type="password"
-      required>
-    <div *ngIf="firstFormGroup.get('password').hasError('required')">
-      Please enter your password
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Last Name"
+        formControlName="lastName"
+        required>
+      <div
+        *ngIf="firstFormGroup.get('lastName').invalid && (firstFormGroup.get('lastName').dirty || firstFormGroup.get('lastName').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('lastName').hasError('required')">
+          Please enter your Last Name
+        </div>
+      </div>
     </div>
-
-  <br/>
-
-    <input
-      nbInput
-      placeholder="Confirm Password"
-      formControlName="confirm"
-      type="password"
-      required>
-    <div *ngIf="firstFormGroup.get('confirm').hasError('required')">
-      Please confirm your password
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Gender
     </div>
-    <div *ngIf="firstFormGroup.hasError('notSame')">
-      Password do not match {{firstFormGroup.hasError('notSame')}}
+    <div class="col-form-input">
+      <nb-select placeholder="Gender" formControlName="gender" required>
+        <nb-option [value]="'Male'">Male</nb-option>
+        <nb-option [value]="'Female'">Female</nb-option>
+      </nb-select>
+      <div
+        *ngIf="firstFormGroup.get('gender').invalid && (firstFormGroup.get('gender').dirty || firstFormGroup.get('gender').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('gender').hasError('required')">
+          Please enter your Gender
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Email
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Email"
+        formControlName="email"
+        required>
+      <div
+        *ngIf="firstFormGroup.get('email').invalid && (firstFormGroup.get('email').dirty || firstFormGroup.get('email').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('email').hasError('required')">
+          Please enter your Email
+        </div>
+        <div *ngIf="firstFormGroup.get('email').hasError('email')">
+          Please enter correct email
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-form-label">
+      Password
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+        required>
+      <div
+        *ngIf="firstFormGroup.get('password').invalid && (firstFormGroup.get('password').dirty || firstFormGroup.get('password').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('password').hasError('required')">
+          Please enter your Password
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Confirm Password
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Confirm Password"
+        formControlName="confirm"
+        type="password"
+        required>
+      <div
+        *ngIf="firstFormGroup.get('confirm').invalid && (firstFormGroup.get('confirm').dirty || firstFormGroup.get('confirm').touched)"
+        class="validation-msg">
+        <div *ngIf="firstFormGroup.get('confirm').hasError('required')">
+          Please enter your Password
+        </div>
+        <div *ngIf="firstFormGroup.hasError('notSame')">
+          Password do not match
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="validateForm()" nbButton nbStepperNext>next</button>
 
 </form>

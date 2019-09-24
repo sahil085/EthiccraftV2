@@ -1,31 +1,52 @@
 <form [style.fontSize.px]="16" [formGroup]="fourthFormGroup">
-  <ng-template matStepLabel>Done</ng-template>
 
-    <input
-      nbInput
-      placeholder="achievements"
-      formControlName="achievements"
-    >
-
-
-    <input
-      nbInput
-      placeholder="hobbies"
-      formControlName="hobbies"
-    >
-
-
-    <input
-      nbInput
-      placeholder="skills"
-      formControlName="skills"
-    >
-
-
-    <input
-      nbInput
-      placeholder="Inspiration Source"
-      formControlName="inspirationSource"
-    >
+  <div class="form-row">
+    <div class="col-form-label">
+      Achievements
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Achievements"
+        formControlName="achievements"
+      >
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Hobbies
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Hobbies"
+        formControlName="hobbies"
+      >
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Skills
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Skills"
+        formControlName="skills"
+      >
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Inspiration Source
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Inspiration Source"
+        formControlName="inspirationSource"
+      >
+    </div>
+  </div>
 
 </form>

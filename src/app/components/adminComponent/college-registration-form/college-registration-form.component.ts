@@ -56,7 +56,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
     return this.formBuilder.group({
       name: [this.name, Validators.required],
       designation: [this.designation, Validators.required],
-      contact: [this.contact, Validators.required]
+      contact: [this.contact, [Validators.required, Validators.pattern('[6-9]\\d{9}')]]
     });
   }
 
@@ -72,7 +72,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
     this.formArr.removeAt(index);
   }
 
-  onStateChange = (value) => {
+  onStateChange = (value: number) => {
     this.cityList = csc.getCitiesOfState('' + value);
     this.collegeFormGroup.get('city').patchValue(null);
   }

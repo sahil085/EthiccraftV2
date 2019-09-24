@@ -14,18 +14,27 @@ export class SecondFormComponent implements OnInit {
   public presentStateList: any = [];
   public permanentCityList: any = [];
   public presentCityList: any = [];
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.permanentStateList = csc.getStatesOfCountry('101');
     this.presentStateList = csc.getStatesOfCountry('101');
   }
 
-  onPresentStateChange(event) {
-    this.presentCityList = csc.getCitiesOfState('' + event.value);
+  onPresentStateChange(value) {
+    this.presentCityList = csc.getCitiesOfState('' + value);
   }
-  onPermanentStateChange(event) {
-    this.permanentCityList = csc.getCitiesOfState('' + event.value);
+
+  onPermanentStateChange(value) {
+    this.permanentCityList = csc.getCitiesOfState('' + value);
   }
+
+  validateForm = () => {
+    if (this.secondFormGroup.invalid) {
+      this.secondFormGroup.markAllAsTouched();
+    }
+  };
 
 }

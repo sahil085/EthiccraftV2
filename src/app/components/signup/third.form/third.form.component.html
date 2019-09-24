@@ -1,31 +1,64 @@
 <form [style.fontSize.px]="16" [formGroup]="thirdFormGroup">
 
-    <nb-select required placeholder="College Name" formControlName="collegeId">
-      <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>
-    </nb-select>
-    <div *ngIf="thirdFormGroup.get('collegeId').hasError('required')">
-      Please enter your College Name
+  <div class="form-row">
+    <div class="col-form-label">
+      College Name
     </div>
-
-
-    <nb-select placeholder="Course Name" formControlName="courseName" required>
-      <nb-option [value]="'B.Tech'">B.Tech</nb-option>
-      <nb-option [value]="'B.Arch'">B.Arch</nb-option>
-      <nb-option [value]="'B.COM'">B.COM</nb-option>
-    </nb-select>
-    <div *ngIf="thirdFormGroup.get('courseName').hasError('required')">
-      Please enter your Course Name
+    <div class="col-form-input">
+      <nb-select required placeholder="College Name" formControlName="collegeId">
+        <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>
+      </nb-select>
+      <div
+        *ngIf="thirdFormGroup.get('collegeId').invalid && (thirdFormGroup.get('collegeId').dirty || thirdFormGroup.get('collegeId').touched)"
+        class="validation-msg">
+        <div *ngIf="thirdFormGroup.get('collegeId').hasError('required')">
+          Please enter your College Name
+        </div>
+      </div>
     </div>
+  </div>
 
 
-    <nb-select required placeholder="Batch" formControlName="batch">
-      <nb-option [value]="2020">2020</nb-option>
-      <nb-option [value]="2019">2019</nb-option>
-      <nb-option [value]="2018">2018</nb-option>
-      <nb-option [value]="2017">2017</nb-option>
-    </nb-select>
-    <div *ngIf="thirdFormGroup.get('batch').hasError('required')">
-      Please enter your batch
+  <div class="form-row">
+    <div class="col-form-label">
+      Course
     </div>
+    <div class="col-form-input">
+      <nb-select placeholder="Course Name" formControlName="courseName" required>
+        <nb-option [value]="'B.Tech'">B.Tech</nb-option>
+        <nb-option [value]="'B.Arch'">B.Arch</nb-option>
+        <nb-option [value]="'B.COM'">B.COM</nb-option>
+      </nb-select>
+      <div
+        *ngIf="thirdFormGroup.get('courseName').invalid && (thirdFormGroup.get('courseName').dirty || thirdFormGroup.get('courseName').touched)"
+        class="validation-msg">
+        <div *ngIf="thirdFormGroup.get('courseName').hasError('required')">
+          Please enter your Course Name
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Batch
+    </div>
+    <div class="col-form-input">
+      <nb-select required placeholder="Batch" formControlName="batch">
+        <nb-option [value]="'2019-2020'">2019-2020</nb-option>
+        <nb-option [value]="'2018-2019'">2018-2019</nb-option>
+        <nb-option [value]="'2017-2018'">2017-2018</nb-option>
+        <nb-option [value]="'2016-2017'">2016-2017</nb-option>
+      </nb-select>
+      <div
+        *ngIf="thirdFormGroup.get('batch').invalid && (thirdFormGroup.get('batch').dirty || thirdFormGroup.get('batch').touched)"
+        class="validation-msg">
+        <div *ngIf="thirdFormGroup.get('batch').hasError('required')">
+          Please enter your batch
+        </div>
+      </div>
+    </div>
+  </div>
+  <button nbButton nbStepperPrevious>prev</button>
+  <button (click)="validateForm()" nbButton nbStepperNext>next</button>
 
 </form>

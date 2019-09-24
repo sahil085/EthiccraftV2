@@ -11,15 +11,18 @@ import {College} from '../../../models/college';
 export class ThirdFormComponent implements OnInit {
 
   @Input() thirdFormGroup: FormGroup;
-  @Input() collegeList: College[] = [] ;
+  @Input() collegeList: College[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  keyComparator(a: KeyValue<number, String>, b: KeyValue<number, String>) {
-    return 0;
-  }
+  validateForm = () => {
+    if (this.thirdFormGroup.invalid) {
+      this.thirdFormGroup.markAllAsTouched();
+    }
+  };
 
 }
