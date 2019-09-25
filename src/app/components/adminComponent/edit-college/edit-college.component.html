@@ -1,91 +1,238 @@
 <form [style.fontSize.px]="16" [formGroup]="collegeFormGroup">
   <nb-card>
-      <input
-        nbInput
-        placeholder="College Name"
-        formControlName="collegeName"
-        [(ngModel)]="initialCollegeData.collegeName"
-        required>
+    <nb-card-body>
+      <div class="form-row">
+        <div class="col-form-label">
+          College Name
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="College Name"
+            formControlName="collegeName"
+            required>
+          <div
+            *ngIf="collegeFormGroup.get('collegeName').invalid && (collegeFormGroup.get('collegeName').dirty || collegeFormGroup.get('collegeName').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('collegeName').hasError('required')">
+              Please enter the College Name
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-form-label">
+          College Abbreviation
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="College Abbreviation"
+            formControlName="collegeAbbreviation"
+            required
+          />
+          <div
+            *ngIf="collegeFormGroup.get('collegeAbbreviation').invalid && (collegeFormGroup.get('collegeAbbreviation').dirty || collegeFormGroup.get('collegeAbbreviation').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('collegeAbbreviation').hasError('required')">
+              College Abbreviation is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-form-label">
+          University Name
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="University Name"
+            formControlName="universityName"
+            required>
+          <div
+            *ngIf="collegeFormGroup.get('universityName').invalid && (collegeFormGroup.get('universityName').dirty || collegeFormGroup.get('universityName').touched)"
+            class="validation-msg">
+            <div
+              *ngIf="collegeFormGroup.get('universityName').invalid && (collegeFormGroup.get('universityName').dirty || collegeFormGroup.get('universityName').touched)"
+              class="validation-msg">
+              <div *ngIf="collegeFormGroup.get('universityName').hasError('required')">
+                University Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-form-label">
+          Address
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="Address"
+            formControlName="address"
+            required>
+          <div
+            *ngIf="collegeFormGroup.get('address').invalid && (collegeFormGroup.get('address').dirty || collegeFormGroup.get('address').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('address').hasError('required')">
+              Please enter the Address
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-form-label">
+          State
+        </div>
+        <div class="col-form-select">
+          <nb-select (selectedChange)="onStateChange($event)" placeholder="State" formControlName="state" required>
+            <nb-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</nb-option>
+          </nb-select>
+          <div
+            *ngIf="collegeFormGroup.get('state').invalid && (collegeFormGroup.get('state').dirty || collegeFormGroup.get('state').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('state').hasError('required')">
+              State is required
+            </div>
+          </div>
+        </div>
+        <div class="col-form-label text-right">
+          City
+        </div>
+        <div class="col-form-select">
+          <nb-select placeholder="City" formControlName="city" required>
+            <nb-option *ngFor="let city of cityList" [value]="city.name">{{city.name}}</nb-option>
+          </nb-select>
+          <div
+            *ngIf="collegeFormGroup.get('city').invalid && (collegeFormGroup.get('city').dirty || collegeFormGroup.get('city').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('city').hasError('required')">
+              City is required
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-      <input
-        nbInput
-        placeholder="College Abbreviation"
-        formControlName="collegeAbbreviation"
-        [(ngModel)]="initialCollegeData.collegeAbbreviation"
-        required
-      >
+      <div class="form-row">
+        <div class="col-form-label">
+          Comments
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="Comments"
+            formControlName="comments"
+          >
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-form-label">
+          Faculty
+        </div>
+        <div class="col-form-input">
+          <input
+            nbInput fullWidth
+            placeholder="Faculty Name"
+            formControlName="faculty"
+            required>
+          <div
+            *ngIf="collegeFormGroup.get('faculty').invalid && (collegeFormGroup.get('faculty').dirty || collegeFormGroup.get('faculty').touched)"
+            class="validation-msg">
+            <div *ngIf="collegeFormGroup.get('faculty').hasError('required')">
+              Please enter the Faculty Name
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-form-label" style="margin-bottom: 12px;">
+          Add References
+        </div>
+        <div class="col-form-input referrer-btn">
+          <button nbButton
+                  hero
+                  type="button"
+                  (click)="addItem()"
+                  style="background-color: #1ab394; color: white;">
+            <nb-icon icon="person-add-outline" title="Add Referrer"></nb-icon>
+          </button>
+        </div>
+        <div formArrayName="referenceList"
+             *ngFor="let reference of formArr.controls; let i = index;" style="width: 100%;">
+          <div class="reference-row" [formGroupName]="i.toString()">
+            <div>
+              <input
+                nbInput
+                formControlName="name"
+                placeholder="Referrer Name"
+                required
+              >
+              <div
+                *ngIf="formArr.controls[i].get('name').invalid && (formArr.controls[i].get('name').dirty || formArr.controls[i].get('name').touched)"
+                class="validation-msg">
+                <div *ngIf="formArr.controls[i].get('name').hasError('required')">
+                  Please enter the Referrer Name
+                </div>
+              </div>
+            </div>
 
-    <br/>
-      <input
-        nbInput
-        placeholder="University Name"
-        formControlName="universityName"
-        [(ngModel)]="initialCollegeData.universityName"
-        required>
+            <div>
+              <input
+                nbInput
+                formControlName="designation"
+                placeholder="Designation"
+                required
+              >
+              <div
+                *ngIf="formArr.controls[i].get('designation').invalid && (formArr.controls[i].get('designation').dirty || formArr.controls[i].get('designation').touched)"
+                class="validation-msg">
+                <div *ngIf="formArr.controls[i].get('designation').hasError('required')">
+                  Please enter the Designation
+                </div>
+              </div>
+            </div>
 
-    <br/>
-      <input
-        nbInput
-        placeholder="Address"
-        formControlName="address"
-        [(ngModel)]="initialCollegeData.address"
-        required>
+            <div>
+              <input
+                nbInput
+                type="number"
+                maxlength="10"
+                formControlName="contact"
+                placeholder="Contact"
+                required
+              >
+              <div
+                *ngIf="formArr.controls[i].get('contact').invalid && (formArr.controls[i].get('contact').dirty || formArr.controls[i].get('contact').touched)"
+                class="validation-msg">
+                <div *ngIf="formArr.controls[i].get('contact').hasError('required')">
+                  Please enter the Contact
+                </div>
+                <div *ngIf="formArr.controls[i].get('contact').hasError('pattern')">
+                  Please enter a valid Contact
+                </div>
+              </div>
+            </div>
 
-    <br/>
-
-      <input
-        nbInput
-        placeholder="City"
-        formControlName="city"
-        [(ngModel)]="initialCollegeData.city"
-        required>
-
-
-      <input
-        nbInput
-        placeholder="State"
-        formControlName="state"
-        [(ngModel)]="initialCollegeData.state"
-        required>
-
-    <br/>
-
-      <input
-        nbInput
-        placeholder="Comments"
-        formControlName="comments"
-        [(ngModel)]="initialCollegeData.comments"
-        required>
-
-    <br/>
-
-      <input
-        nbInput
-        placeholder="Faculty"
-        formControlName="faculty"
-        [(ngModel)]="initialCollegeData.faculty"
-        required>
-
-
-      <input
-        nbInput
-        placeholder="Referrer Name"
-        formControlName="referencePersonName"
-        [(ngModel)]="initialCollegeData.referencePersonName"
-        required>
-
-
-      <input
-        nbInput
-        placeholder="Referrer Contact"
-        formControlName="referencePersonContact"
-        width="100%"
-        [(ngModel)]="initialCollegeData.referencePersonContact"
-        required>
-
-    <div>
-      <button nbButton (click)="submitForm()">Save Details</button>
-    </div>
+            <button *ngIf="formArr.controls.length > 1" (click)="deleteRow(i)"
+                    style="background-color: #ff4444; color: white; border: 0; border-radius: 4px; font-weight: bolder;">
+              <nb-icon icon="trash-2-outline" title="Delete Referrer"></nb-icon>
+            </button>
+          </div>
+        </div>
+        <div style="background-color: #ffeecc; color: #f44; margin-bottom: 20px;"
+             *ngIf="collegeFormGroup.get('referenceList').hasError('required')">
+          Please add at least one Referrer
+        </div>
+      </div>
+      <div>
+        <button nbButton (click)="submitForm()">Save Details</button>
+      </div>
+    </nb-card-body>
   </nb-card>
 </form>

@@ -52,6 +52,7 @@ nb-select {
 .reference-row {
   display: flex;
   justify-content: space-between;
+  margin: 4px;
 }
 
 .referrer-btn {

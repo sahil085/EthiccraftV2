@@ -1,6 +1,10 @@
 <form [style.fontSize.px]="16" [formGroup]="collegeFormGroup">
   <nb-card>
+
     <nb-card-body>
+      <div style="padding: 20px 0;">
+        <h3>College Registration Form</h3>
+      </div>
       <div class="form-row">
         <div class="col-form-label">
           College Name
@@ -159,8 +163,8 @@
                   hero
                   type="button"
                   (click)="addItem()"
-                  style="background-color: #1ab394; color: white; margin-right: 20px;">
-            Add Referrer
+                  style="background-color: #1ab394; color: white;">
+            <nb-icon icon="person-add-outline" title="Add Referrer"></nb-icon>
           </button>
         </div>
         <div formArrayName="referenceList"
@@ -219,9 +223,9 @@
               </div>
             </div>
 
-            <button (click)="deleteRow(i)"
+            <button *ngIf="formArr.controls.length > 1" (click)="deleteRow(i)"
                     style="background-color: #ff4444; color: white; border: 0; border-radius: 4px; font-weight: bolder;">
-              <i class="fa fa-trash p-xs"></i>
+              <nb-icon icon="trash-2-outline" title="Delete Referrer"></nb-icon>
             </button>
           </div>
         </div>
