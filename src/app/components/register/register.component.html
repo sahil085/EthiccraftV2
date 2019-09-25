@@ -1,1 +1,108 @@
-<p>register works!</p>
+<form [style.fontSize.px]="16" [formGroup]="membershipForm">
+  <div class="form-row">
+    <div class="col-form-label">
+      Full Name
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Full Name"
+        formControlName="fullName"
+        required>
+      <div
+        *ngIf="membershipForm.get('fullName').invalid && (membershipForm.get('fullName').dirty || membershipForm.get('fullName').touched)"
+        class="validation-msg">
+        <div *ngIf="membershipForm.get('fullName').hasError('required')">
+          Your Name is required
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Email
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Email"
+        formControlName="email"
+        required>
+      <div
+        *ngIf="membershipForm.get('email').invalid && (membershipForm.get('email').dirty || membershipForm.get('email').touched)"
+        class="validation-msg">
+        <div *ngIf="membershipForm.get('email').hasError('required')">
+          Email is required
+        </div>
+        <div *ngIf="membershipForm.get('email').hasError('email')">
+          Please enter correct email
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Contact
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Contact"
+        formControlName="contact"
+        required>
+      <div
+        *ngIf="membershipForm.get('contact').invalid && (membershipForm.get('contact').dirty || membershipForm.get('contact').touched)"
+        class="validation-msg">
+        <div *ngIf="membershipForm.get('contact').hasError('required')">
+          Please enter your Contact
+        </div>
+        <div *ngIf="membershipForm.get('contact').hasError('pattern')">
+          Seems like it is a wrong number
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-form-label">
+      Address
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="Address"
+        formControlName="address"
+        required>
+      <div
+        *ngIf="membershipForm.get('address').invalid && (membershipForm.get('address').dirty || membershipForm.get('address').touched)"
+        class="validation-msg">
+        <div *ngIf="membershipForm.get('address').hasError('required')">
+          Address is required
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="col-form-label">
+      College
+    </div>
+    <div class="col-form-input">
+      <input
+        nbInput fullWidth
+        placeholder="College"
+        formControlName="college"
+        required>
+      <div
+        *ngIf="membershipForm.get('college').invalid && (membershipForm.get('college').dirty || membershipForm.get('college').touched)"
+        class="validation-msg">
+        <div *ngIf="membershipForm.get('college').hasError('required')">
+          Please enter your College
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="register()" nbButton >Register</button>
+
+</form>

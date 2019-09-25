@@ -1,9 +1,10 @@
 .roleForm {
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
   flex-wrap: wrap;
 }
 
-.roleForm > * {
-  flex-basis: 100%;
+.roleForm > div:first-child {
+  width: 100%;
 }
