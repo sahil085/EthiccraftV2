@@ -1,47 +1,44 @@
 <nb-layout [center]="true">
-  <nb-layout-header> Login | Ethiccraft </nb-layout-header>
   <nb-layout-column>
-    <nb-card >
+    <nb-card>
       <nb-card-body>
-        <div class="row container">
-          <div class="middle-box text-center loginscreen animated fadeInDown helper">
-            <div class="content">
-              <div>
-                <div class="logo-container">
-                  <img src="../../../assets/img/ethiccraft.jpg"/>
-                </div>
-                <span class="logo-name" >ETHICCRAFT</span>
-              </div>
-
-              <h3>Welcome to Ethicraft</h3>
-              <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-              <div *ngIf="invalidMessage != null" style="color: red">
-                {{invalidMessage}}
-              </div>
-              <p>Login in. To see it in action.</p>
-              <form [formGroup]="loginForm" class="m-t" role="form">
-                <div class="form-group">
-                  <input type="email" class="form-control" nbInput  formControlName="username" placeholder="Username" required="">
-                </div>
-                <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('required')">
-          Please Enter Your Email
-        </span>
-                <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('email')">
-          Please Enter Correct Email
-        </span>
-                <div class="form-group">
-                  <input type="password" nbInput class="form-control" formControlName="password" placeholder="Password" required="">
-                </div>
-                <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('password').hasError('required')">
-          Please Enter Your Password
-        </span>
-
-                <button type="submit" nbButton (click)="login()" class="btn btn-primary block full-width m-b">Login</button>
-
-              </form>
-              <span>Not a Member? <a routerLink="/register">Sign Up</a></span>
+        <div class="content">
+          <div>
+            <div class="logo-container">
+              <img src="../../../assets/img/ethiccraft.jpg"/>
             </div>
           </div>
+
+          <h3>Welcome to Ethicraft</h3>
+          <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+          <div *ngIf="invalidMessage != null" style="color: red">
+            {{invalidMessage}}
+          </div>
+          <p>Login in. To see it in action.</p>
+          <form [formGroup]="loginForm" class="m-t" role="form">
+            <div class="form-group">
+              <input type="email" class="form-control" nbInput formControlName="username" placeholder="Username"
+                     required="">
+            </div>
+            <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('required')">
+                  Please Enter Your Email
+                </span>
+            <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('email')">
+                  Please Enter Correct Email
+                </span>
+            <div class="form-group">
+              <input type="password" nbInput class="form-control" formControlName="password" placeholder="Password"
+                     required="">
+            </div>
+            <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('password').hasError('required')">
+                  Please Enter Your Password
+                </span>
+
+            <button type="submit" nbButton (click)="login()" class="btn btn-primary block full-width m-b">Login
+            </button>
+
+          </form>
+          <span>Not a Member? <a routerLink="/register">Sign Up</a></span>
         </div>
       </nb-card-body>
     </nb-card>

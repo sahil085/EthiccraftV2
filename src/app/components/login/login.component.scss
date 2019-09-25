@@ -1,0 +1,17 @@
+nb-card {
+  align-items: center;
+  justify-content: center;
+
+  nb-card-body {
+    width: fit-content;
+
+    .content {
+      text-align: center;
+
+      form {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+}

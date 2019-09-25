@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
-      console.log('response ' + response);
       this.menuService.navigateHome(this.returnUrl);
       this.router.navigate([this.returnUrl]);
     });
