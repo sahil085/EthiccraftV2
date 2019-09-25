@@ -66,7 +66,8 @@ export class SignupComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       courseName: ['', Validators.required],
       collegeId: ['', Validators.required],
-      batch: ['', Validators.required]
+      batch: ['', Validators.required],
+      unregisteredCollege: ['', Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
       achievements: [''],
@@ -102,8 +103,8 @@ export class SignupComponent implements OnInit {
       this.formData.collegeId = this.formData.collegeId * 1;
       const permanentStateId = this.formData.permanentAddress.state;
       const presentStateId = this.formData.presentAddress.state;
-      this.formData.permanentAddress.state = csc.getStateById(permanentStateId).name;
-      this.formData.presentAddress.state = csc.getStateById(presentStateId).name;
+      this.formData.permanentAddress.state = (isNaN(permanentStateId)) ? permanentStateId : csc.getStateById(permanentStateId).name;
+      this.formData.presentAddress.state = (isNaN(presentStateId)) ? presentStateId : csc.getStateById(presentStateId).name;
       console.log(this.formData);
       this.signUpService.signUp(this.formData).subscribe(
         (data) => {

@@ -5,8 +5,10 @@
       College Name
     </div>
     <div class="col-form-input">
-      <nb-select required placeholder="College Name" formControlName="collegeId">
+      <nb-select required placeholder="College Name" formControlName="collegeId"
+                 (selectedChange)="setOtherCollege($event)" #clg>
         <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>
+        <nb-option [value]="'other'">Any Other</nb-option>
       </nb-select>
       <div
         *ngIf="thirdFormGroup.get('collegeId').invalid && (thirdFormGroup.get('collegeId').dirty || thirdFormGroup.get('collegeId').touched)"
@@ -17,6 +19,28 @@
       </div>
     </div>
   </div>
+  <ng-container *ngIf="newCollegeEntry">
+    <div class="form-row">
+      <div class="col-form-label">
+        College Name and City
+      </div>
+      <div class="col-form-input">
+        <input
+          nbInput
+          placeholder="College Name and City"
+          formControlName="unregisteredCollege"
+          required
+        >
+        <div
+          *ngIf="thirdFormGroup.get('collegeId').invalid && (thirdFormGroup.get('collegeId').dirty || thirdFormGroup.get('collegeId').touched)"
+          class="validation-msg">
+          <div *ngIf="thirdFormGroup.get('unregisteredCollege').hasError('required')">
+            Please enter your College Name
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
 
   <div class="form-row">
