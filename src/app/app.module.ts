@@ -46,6 +46,7 @@ import {FourthFormComponent} from './components/signup/fourth.form/fourth.form.c
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthHttpInterceptorService} from './services/security/auth-http-interceptor.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
     HttpClientModule,
     NbIconModule,
     NbMenuModule.forRoot(),
-    NbSidebarModule.forRoot()
+    NbSidebarModule.forRoot(),
+    NgSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -1,10 +1,13 @@
 @import 'themes';
 @import "~bootstrap/scss/bootstrap";
 @import '~@nebular/theme/styles/globals';
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 @include nb-install() {
   @include nb-theme-global();
-};
+}
+
+;
 /* You can add global styles to this file, and also import other style files */
 
 $base-color: #00bf98;
@@ -70,4 +73,11 @@ nb-select {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+
+.nb-theme-default button[nbButton] {
+  background-image: linear-gradient(to right, #00bfbd, #00bf98);
+  color: #ffffff;
+  background-color: transparent;
+  border: 0 transparent;
 }

@@ -1,194 +1,197 @@
-<div class="row" id="pendingRequestBlock">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>Add User Role</h5>
+<nb-card>
+  <nb-card-body>
 
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
+    <form name="assignRoleForm" id="assignRole" class="roleForm" [formGroup]="assignRoleForm">
+      <div>
+      <div style="padding: 20px 0;">
+        <h3>Assign Role Form</h3>
+      </div>
+      <div class="form-row">
+        <div class="col-form-label">
+          Username
         </div>
-      </div>
-
-      <div class="ibox-content">
-
-        <form name="assignRoleForm" id="assignRole" class="example-form">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-              <tr>
-                <th>User Name</th>
-                <th>User Role</th>
-                <th>Colleges</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-
-                    <input
-                      type="text"
-                      placeholder="Username"
-                      aria-label="Number"
-                      nbInput
-                      [formControl]="username"
-                      required
-                    >
-
-                      <nb-option *ngFor="let username of filteredUsername | async" [value]="username">
-                        {{username}}
-                      </nb-option>
-                    <div *ngIf="username.hasError('required')">
-                      Please select any username
-                    </div>
-                    <div *ngIf="username.hasError('email')">
-                      Username must be a valid email id
-                    </div>
-
-                </td>
-                <td>
-
-                    <label>Role</label>
-                    <nb-select [formControl]="userRole" (selectionChange)="changeSelection()" required>
-                      <nb-option *ngFor="let role of roles" [value]="role">{{role}}</nb-option>
-                    </nb-select>
-                    <div *ngIf="userRole.hasError('required')">
-                      Please select any role
-                    </div>
-
-                </td>
-                <td>
-                    <label>Colleges</label>
-                    <nb-select [formControl]="colleges" [disabled]="!showCollegeSelect" multiple>
-                      <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>
-                    </nb-select>
-
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <div style="float:right">
-                    <button class="btn btn-sm btn-primary submitAssignRole" type="submit" (click)="submitForm()">
-                      <strong>Assign Role</strong>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="ibox float-e-margins">
-      <div class="ibox-title">
-        <h5>User Role</h5>
-
-        <div class="ibox-tools">
-          <a class="collapse-link">
-            <i class="fa fa-chevron-up"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="ibox-content">
-        <table id="viewUserRoleTable" class="table table-responsive table-striped">
-          <thead>
-          <tr>
-            <th>User Name</th>
-            <th>User Email</th>
-            <th>Role</th>
-            <th>Colleges</th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr class="p-h-md" *ngFor="let userRole of userRoleCollegeMappingList">
-            <td>{{userRole.userName}}</td>
-            <td>{{userRole.userEmail}}</td>
-            <td>{{userRole.role}}</td>
-            <td>
-              {{userRole.collegeName}}
-            </td>
-            <td>
-              <a title="Delete activity" (click)="deleteUserRole(userRole.id)"><i class="fa fa-trash p-xs"></i></a>
-              <a *ngIf="userRole.collegeName && roleCA !== userRole.role"  (click)="editUserRoleMapping(userRole.id)" title="Edit user role"><i class="fa fa-pencil p-xs"></i></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Update User Role College Mapping</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-
-              <div class="ibox-content">
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <!--<ng-select [multiple]="true" [(ngModel)]="selectedCars">-->
-                      <!--<ng-option *ngFor="let car of cars" [value]="car.id" [disabled]="car.disabled">{{car.name}}</ng-option>-->
-                      <!--<ng-option [value]="'custom'">Custom</ng-option>-->
-                    <!--</ng-select>-->
-                    <label for="updateUserRoleCollegeMapping">Colleges</label>
-                    <nb-select id="updateUserRoleCollegeMapping" required [(ngModel)]="updateColleges" [multiple]="true">
-                      <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>
-                    </nb-select>
-                    <h3 class="red-bg font-bold" *ngIf="updateColleges.length === 0">Required field</h3>
-                    <!--<select id="updateUserRoleCollegeMapping"  required class="chosen-select" label="" multiple >-->
-                      <!--<option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</option>-->
-                    <!--</select>-->
-                  </div>
-                  <!--<form>-->
-                    <!--<mat-form-field >-->
-                      <!--<label>Colleges</label>-->
-                      <!--<nb-select [formControl]="updateCollegeList" multiple>-->
-                        <!--<nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>-->
-                      <!--</nb-select>-->
-                    <!---->
-                  <!--</form>-->
-
-
-                </div>
+        <div class="col-form-input">
+          <ng-select [items]="emails"
+                     formControlName="username"
+                     [selectOnTab]="true"
+                     placeholder="Username"
+                     appendTo="body"
+          >
+          </ng-select>
+          <div
+            *ngIf="assignRoleForm.get('username').invalid && (assignRoleForm.get('username').dirty || assignRoleForm.get('username').touched)"
+            class="validation-msg">
+            <div *ngIf="assignRoleForm.get('username').hasError('required')">
+              Please select any username
+            </div>
+            <div *ngIf="assignRoleForm.get('username').hasError('email')">
+              Username must be a valid email id
             </div>
           </div>
-
         </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-sm btn-primary submitAssignRole" type="submit" (click)="update()">
-          <strong>Update</strong>
-        </button>
-      </div>
-    </div>
 
-  </div>
-</div>
+      <div class="form-row">
+        <div class="col-form-label">
+          User Role
+        </div>
+        <div class="col-form-input">
+          <ng-select [items]="roles"
+                     formControlName="userRole"
+                     [selectOnTab]="true"
+                     placeholder="User Role"
+                     appendTo="body"
+          >
+          </ng-select>
+          <div
+            *ngIf="assignRoleForm.get('userRole').invalid && (assignRoleForm.get('userRole').dirty || assignRoleForm.get('userRole').touched)"
+            class="validation-msg">
+            <div *ngIf="assignRoleForm.get('userRole').hasError('required')">
+              Please select any role
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row" *ngIf="assignRoleForm.get('userRole').value === 'EEO'">
+        <div class="col-form-label">
+          Colleges
+        </div>
+        <div class="col-form-input">
+          <ng-select [items]="collegeList"
+                     formControlName="colleges"
+                     bindLabel="collegeName"
+                     bindValue="id"
+                     [selectOnTab]="true"
+                     appendTo="body"
+                     [multiple]="true"
+          >
+          </ng-select>
+          <div
+            *ngIf="assignRoleForm.get('colleges').invalid && (assignRoleForm.get('colleges').dirty || assignRoleForm.get('colleges').touched)"
+            class="validation-msg">
+            <div *ngIf="assignRoleForm.get('colleges').hasError('required')">
+              Please enter the College
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div>
+        <button nbButton (click)="submitForm()">Assign</button>
+      </div>
+
+    </form>
+
+  </nb-card-body>
+</nb-card>
+
+
+<!--&lt;!&ndash;See it later&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="col-lg-12">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="ibox float-e-margins">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="ibox-title">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h5>User Role</h5>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <div class="ibox-tools">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="collapse-link">&ndash;&gt;-->
+<!--&lt;!&ndash;            <i class="fa fa-chevron-up"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;          </a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;      <div class="ibox-content">&ndash;&gt;-->
+<!--&lt;!&ndash;        <table id="viewUserRoleTable" class="table table-responsive table-striped">&ndash;&gt;-->
+<!--&lt;!&ndash;          <thead>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>User Name</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>User Email</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>Role</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>Colleges</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>Action</th>&ndash;&gt;-->
+<!--&lt;!&ndash;          </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;          <tr class="p-h-md" *ngFor="let userRole of userRoleCollegeMappingList">&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>{{userRole.userName}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>{{userRole.userEmail}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>{{userRole.role}}</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;              {{userRole.collegeName}}&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;              <a title="Delete activity" (click)="deleteUserRole(userRole.id)"><i class="fa fa-trash p-xs"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;              <a *ngIf="userRole.collegeName && roleCA !== userRole.role"  (click)="editUserRoleMapping(userRole.id)" title="Edit user role"><i class="fa fa-pencil p-xs"></i></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;          </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;          </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;        </table>&ndash;&gt;-->
+
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash; Modal &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<div id="myModal" class="modal fade" role="dialog">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="modal-dialog">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Modal content&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="modal-content">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="modal-header">&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="button" class="close" data-dismiss="modal">&times;</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <h4 class="modal-title">Update User Role College Mapping</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="modal-body">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;          <div class="col-lg-12">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="ibox float-e-margins">&ndash;&gt;-->
+
+<!--&lt;!&ndash;              <div class="ibox-content">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <div class="col-md-12">&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;<ng-select [multiple]="true" [(ngModel)]="selectedCars">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;<ng-option *ngFor="let car of cars" [value]="car.id" [disabled]="car.disabled">{{car.name}}</ng-option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;<ng-option [value]="'custom'">Custom</ng-option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;</ng-select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="updateUserRoleCollegeMapping">Colleges</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <nb-select id="updateUserRoleCollegeMapping" required [(ngModel)]="updateColleges" [multiple]="true">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </nb-select>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h3 class="red-bg font-bold" *ngIf="updateColleges.length === 0">Required field</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;<select id="updateUserRoleCollegeMapping"  required class="chosen-select" label="" multiple >&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;<option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;</select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash;<form>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;<mat-form-field >&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;<label>Colleges</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;<nb-select [formControl]="updateCollegeList" multiple>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        &lt;!&ndash;<nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                      &lt;!&ndash;</nb-select>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                  &lt;!&ndash;</form>&ndash;&gt;&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;          </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="modal-footer">&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="btn btn-sm btn-primary submitAssignRole" type="submit" (click)="update()">&ndash;&gt;-->
+<!--&lt;!&ndash;          <strong>Update</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
 
 

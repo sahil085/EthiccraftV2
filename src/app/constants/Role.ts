@@ -1,5 +1,5 @@
 export class Role {
-  
+
   public static userRoles = {
 
     EEO: 'EEO',

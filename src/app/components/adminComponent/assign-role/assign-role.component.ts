@@ -1,57 +1,47 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {Observable} from 'rxjs';
-import {AppComponent} from '../../../app.component';
-import {map, startWith} from 'rxjs/operators';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {College} from '../../../models/college';
 import {UserRoleCollegeMappingDTO} from '../../../models/UserRoleCollegeMappingDTO';
 import {UserRoleCollegeMapping} from '../../../models/UserRoleCollegeMapping';
 import {AssignRoleService} from '../../../services/assign-role.service';
 import {CollegeService} from '../../../services/college.service';
 import {Role} from '../../../constants/Role';
+import alert from 'sweetalert2';
+import {NbSelectModule} from '@nebular/theme';
 
-declare let $: any;
 
 @Component({
   selector: 'app-assign-role',
   templateUrl: './assign-role.component.html',
-  styleUrls: ['./assign-role.component.css']
+  styleUrls: ['./assign-role.component.scss'],
+  providers: [NbSelectModule]
 })
 export class AssignRoleComponent implements OnInit {
 
-  username = new FormControl('', [Validators.required, Validators.email]);
-  userRole = new FormControl('', Validators.required);
-  colleges = new FormControl();
+  assignRoleForm: FormGroup;
   updateColleges: any = [];
   emails: string[] = [];
   roles: string[] = [];
   roleCA = 'CAMPUS AMBASSADOR';
-  showCollegeSelect = false;
   collegeList: College[] = [];
-  filteredUsername: Observable<string[]>;
   userRoleCollegeMappingList: UserRoleCollegeMappingDTO[] = [];
   userRoleCollegeMapping: UserRoleCollegeMapping;
-  selectedCars = [3];
-  cars = [
-    {id: 1, name: 'Volvo'},
-    {id: 2, name: 'Saab', disabled: true},
-    {id: 3, name: 'Opel'},
-    {id: 4, name: 'Audi'},
-  ];
 
-  constructor(private roleService: AssignRoleService, private collegeService: CollegeService) {
+  constructor(private roleService: AssignRoleService,
+              private collegeService: CollegeService,
+              private formBuilder: FormBuilder
+  ) {
+    this.roles = Role.getAllRoles();
   }
 
   ngOnInit() {
 
-
-    this.filteredUsername = this.username.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    this.assignRoleForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      userRole: ['', Validators.required],
+      colleges: [[], Validators.required]
+    });
     this.fetchAllEmails();
-    this.fetchAllRoles();
     this.fetchActiveCollege();
     this.findAllUserRole();
   }
@@ -59,12 +49,10 @@ export class AssignRoleComponent implements OnInit {
   fetchActiveCollege = () => {
     this.collegeService.findCollegeDropDown().subscribe(
       data => {
-        console.log(this.collegeList);
         this.collegeList = data;
-        console.log(this.collegeList);
       }
     );
-  };
+  }
 
   fetchAllEmails() {
     this.roleService.getAllEmails().subscribe(data => {
@@ -72,34 +60,19 @@ export class AssignRoleComponent implements OnInit {
     });
   }
 
-  fetchAllRoles() {
-    this.roleService.getAllRoles().subscribe(data => {
-      this.roles = data;
-    });
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.emails.filter(option => option.toLowerCase().includes(filterValue));
-  }
-
-  changeSelection = () => {
-    this.showCollegeSelect = this.userRole.value === Role.userRoles.EEO;
-  };
-
   submitForm = () => {
-    if (this.username.value && this.userRole.value) {
+    if (this.assignRoleForm.get('username').value && this.assignRoleForm.get('userRole').value) {
       const userRoleCO = {
-        username: this.username.value,
-        role: this.userRole.value,
-        colleges: this.colleges.value || []
+        username: this.assignRoleForm.get('username').value,
+        role: this.assignRoleForm.get('userRole').value,
+        colleges: this.assignRoleForm.get('colleges').value || []
       };
       this.roleService.assignRole(userRoleCO).subscribe(data => {
         if (data.successMessage !== null) {
-          // AppComponent.showToaster(data.successMessage, data.type);
+          this.showToaster(data.successMessage, data.type);
           this.findAllUserRole();
         } else {
-          // AppComponent.showToaster(data.errorMessage, data.type);
+          this.showToaster(data.errorMessage, data.type);
         }
 
       });
@@ -115,17 +88,14 @@ export class AssignRoleComponent implements OnInit {
         colleges: this.updateColleges || []
       };
       this.roleService.updateUserRoleCollegeMapping(userRoleCO).subscribe(data => {
-        $('#myModal').modal('hide');
         if (data.successMessage !== null) {
-          // AppComponent.showToaster(data.successMessage, data.type);
+          this.showToaster(data.successMessage, data.type);
           this.findAllUserRole();
         } else {
-          // AppComponent.showToaster(data.errorMessage, data.type);
+          this.showToaster(data.errorMessage, data.type);
         }
-
       });
     }
-
   }
 
 
@@ -133,37 +103,38 @@ export class AssignRoleComponent implements OnInit {
     this.roleService.findAllUserRole().subscribe(data => {
       this.userRoleCollegeMappingList = data;
     });
-  };
+  }
 
   deleteUserRole = (id) => {
 
-    // swal({
-    //   title: 'Are you sure?',
-    //   text: 'Are you sure you want to delete the user role ?',
-    //   type: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Yes, delete it!',
-    //   cancelButtonText: 'No, keep it'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     this.roleService.deleteUserRole(id).subscribe(data => {
-    //       if (data.successMessage !== null) {
-    //         AppComponent.showToaster(data.successMessage, data.type);
-    //       } else {
-    //         AppComponent.showToaster(data.errorMessage, data.type);
-    //       }
-    //       this.findAllUserRole();
-    //     });
-    //   } else if (result.dismiss === swal.DismissReason.cancel) {
-    //     swal(
-    //       'Cancelled',
-    //       'Operation canceled)',
-    //       'error'
-    //     );
-    //   }
-    // });
+    alert.fire({
+      title: 'Are you sure?',
+      text: 'Are you sure you want to delete the user role ?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.roleService.deleteUserRole(id).subscribe(data => {
+          if (data.successMessage !== null) {
+            this.showToaster(data.successMessage, data.type);
+          } else {
+            this.showToaster(data.errorMessage, data.type);
+          }
+          this.findAllUserRole();
+        });
+      }
+      // else if (result.dismiss === alert.fire().DismissReason.cancel) {
+      //   alert.fire(
+      //     'Cancelled',
+      //     'Operation canceled)',
+      //     'error'
+      //   );
+      // }
+    });
 
-  };
+  }
 
 
   editUserRoleMapping(id) {
@@ -171,9 +142,14 @@ export class AssignRoleComponent implements OnInit {
     this.roleService.findUserRoleById(id).subscribe(data => {
       this.userRoleCollegeMapping = data;
       this.updateColleges = this.userRoleCollegeMapping.collegeList.map(data1 => data1.id);
-      setTimeout(() => {
-        $('#myModal').modal('show');
-      }, 200);
+    });
+  }
+
+  showToaster = (message, type) => {
+    alert.fire({
+      title: message,
+      type: type,
+      timer: 1500
     });
   }
 }
