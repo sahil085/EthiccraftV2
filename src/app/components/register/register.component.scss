@@ -1,3 +1,25 @@
-nb-card h3 {
-  margin-bottom: 20px;
+.membership-form-header {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nb-card-header {
+  width: 100%;
+
+  .membership-form-header {
+
+    .header-logo-wrapper {
+      width: 76px;
+      height: 75px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px){
+  .header-logo-wrapper {
+    display: none;
+  }
+
 }
