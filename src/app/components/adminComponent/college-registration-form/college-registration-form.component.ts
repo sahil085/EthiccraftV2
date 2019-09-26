@@ -72,22 +72,31 @@ export class CollegeRegistrationFormComponent implements OnInit {
     this.formArr.removeAt(index);
   }
 
-  onStateChange = (value: number) => {
-    this.cityList = csc.getCitiesOfState('' + value);
-    this.collegeFormGroup.get('city').patchValue(null);
+  onStateChange = (value) => {
+    if (value) {
+      this.collegeFormGroup.get('city').setValue(null);
+      this.cityList = csc.getCitiesOfState('' + value.id);
+    } else {
+      this.collegeFormGroup.get('city').setValue(null);
+      this.cityList = [];
+    }
   }
 
   submitForm = () => {
     if (this.collegeFormGroup.valid) {
-      this.collegeFormGroup.value.state = this.stateList[this.stateList.findIndex(
-        (elem) => elem.id === this.collegeFormGroup.value.state)].name;
+      if (!isNaN(this.collegeFormGroup.value.state)) {
+        this.collegeFormGroup.value.state = this.stateList.filter((item) => {
+          return item.id === this.collegeFormGroup.value.state;
+        })[0].name;
+      }
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
           if (data['errorMessage'] !== null) {
             this.showToaster(data['errorMessage'], 'error');
           } else {
             this.showToaster(data['successMessage'], 'success');
-            this.router.navigate([AppUrl.VIEW_COLLEGE_ADMIN]);
+            this.collegeFormGroup.reset();
+            this.router.navigateByUrl(AppUrl.VIEW_COLLEGE_ADMIN);
           }
         }
         ,

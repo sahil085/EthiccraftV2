@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import csc, {ICity, IState} from 'country-state-city';
 import {CollegeService} from '../../services/college.service';
 import {College} from '../../models/college';
+import alert from "sweetalert2";
 
 @Component({
   selector: 'app-register',
@@ -53,6 +54,7 @@ export class RegisterComponent implements OnInit {
       }
       this.membershipForm.value.contact = parseInt(this.membershipForm.value.contact, 10);
       console.log(this.membershipForm.value);
+      this.membershipForm.reset();
     }
   }
 
@@ -72,6 +74,14 @@ export class RegisterComponent implements OnInit {
         this.collegeList = data;
       }
     );
+  }
+
+  showToaster = (message, type) => {
+    alert.fire({
+      title: message,
+      type: type,
+      timer: 1500
+    });
   }
 
 }

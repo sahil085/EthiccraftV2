@@ -94,9 +94,17 @@
           State
         </div>
         <div class="col-form-select">
-          <nb-select (selectedChange)="onStateChange($event)" placeholder="State" formControlName="state" required>
-            <nb-option *ngFor="let state of stateList" [value]="state.id">{{state.name}}</nb-option>
-          </nb-select>
+          <ng-select
+            [items]="stateList"
+            formControlName="state"
+            [selectOnTab]="true"
+            bindLabel="name"
+            bindValue="id"
+            appendTo="body"
+            (change)="onStateChange($event)"
+            placeholder="State"
+          >
+          </ng-select>
           <div
             *ngIf="collegeFormGroup.get('state').invalid && (collegeFormGroup.get('state').dirty || collegeFormGroup.get('state').touched)"
             class="validation-msg">
@@ -109,9 +117,16 @@
           City
         </div>
         <div class="col-form-select">
-          <nb-select placeholder="City" formControlName="city" required>
-            <nb-option *ngFor="let city of cityList" [value]="city.name">{{city.name}}</nb-option>
-          </nb-select>
+          <ng-select
+            [items]="cityList"
+            formControlName="city"
+            [selectOnTab]="true"
+            appendTo="body"
+            bindLabel="name"
+            bindValue="name"
+            placeholder="City"
+          >
+          </ng-select>
           <div
             *ngIf="collegeFormGroup.get('city').invalid && (collegeFormGroup.get('city').dirty || collegeFormGroup.get('city').touched)"
             class="validation-msg">
@@ -121,6 +136,7 @@
           </div>
         </div>
       </div>
+
 
 
       <div class="form-row">
