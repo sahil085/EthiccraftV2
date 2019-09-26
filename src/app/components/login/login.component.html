@@ -18,20 +18,30 @@
           <div class="form-group">
             <input type="email" class="form-control" nbInput formControlName="username" placeholder="Username"
                    required="">
+            <div
+              *ngIf="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched)"
+              class="validation-msg">
+              <div style="color: red" *ngIf="loginForm.get('username').hasError('required')">
+                Please Enter Your Email
+              </div>
+              <div style="color: red" *ngIf="loginForm.get('username').hasError('email')">
+                Please Enter Correct Email
+              </div>
+            </div>
           </div>
-          <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('required')">
-                  Please Enter Your Email
-                </span>
-          <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('username').hasError('email')">
-                  Please Enter Correct Email
-                </span>
+
           <div class="form-group">
             <input type="password" nbInput class="form-control" formControlName="password" placeholder="Password"
                    required="">
+            <div
+              *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+              class="validation-msg">
+              <div style="color: red" *ngIf="loginForm.get('password').hasError('required')">
+                Please Enter Your Password
+              </div>
+            </div>
           </div>
-          <span style="color: red" *ngIf="isLoginSubmit && loginForm.get('password').hasError('required')">
-                  Please Enter Your Password
-                </span>
+
 
           <button type="submit" nbButton (click)="login()" class="btn btn-primary block full-width m-b">Login
           </button>

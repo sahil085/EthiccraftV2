@@ -40,10 +40,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
-      this.menuService.navigateHome(this.returnUrl);
-      this.router.navigate([this.returnUrl]);
-    });
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+    } else {
+      this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password).subscribe(response => {
+        this.menuService.navigateHome(this.returnUrl);
+        this.router.navigate([this.returnUrl]);
+      });
+    }
   }
-
 }
