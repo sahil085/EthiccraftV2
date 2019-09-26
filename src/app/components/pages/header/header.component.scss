@@ -1,68 +1,70 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 
-  .logo-container {
-    display: flex;
-    align-items: center;
-    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
-  }
+.logo-container {
+  display: flex;
+  align-items: center;
+  width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+}
 
-  nb-action {
-    height: auto;
-    display: flex;
-    align-content: center;
-  }
+nb-action {
+  height: auto;
+  display: flex;
+  align-content: center;
+}
 
-  nb-user {
-    cursor: pointer;
-  }
+nb-user {
+  cursor: pointer;
+}
 
-  ::ng-deep nb-search button {
-    padding: 0!important;
-  }
+::ng-deep nb-search button {
+  padding: 0 !important;
+}
 
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: auto;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
 
-    .sidebar-toggle {
-      text-decoration: none;
-      color: nb-theme(text-hint-color);
-      nb-icon {
-        font-size: 1.75rem;
-      }
-    }
+  .sidebar-toggle {
+    text-decoration: none;
+    color: nb-theme(text-hint-color);
 
-    .logo {
-      padding: 0 1.25rem;
+    nb-icon {
       font-size: 1.75rem;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-
-    .nav-container {
-      display: flex;
-
-      div {
-        flex: 1;
-      }
     }
   }
 
-  @include media-breakpoint-down(sm) {
-    .control-item {
-      display: none;
-    }
-    .user-action {
-      border: none;
-      padding: 0;
-    }
+  .logo {
+    padding: 0 1.25rem;
+    font-size: 1.75rem;
+    white-space: nowrap;
+    text-decoration: none;
   }
 
-  @include media-breakpoint-down(is) {
-    nb-select {
-      display: none;
+  .nav-container {
+    display: flex;
+
+    & > * {
+      flex: 1;
+      margin: 0 10px;
     }
   }
+}
+
+@include media-breakpoint-down(sm) {
+  .control-item {
+    display: none;
+  }
+  .user-action {
+    border: none;
+    padding: 0;
+  }
+}
+
+@include media-breakpoint-down(is) {
+  nb-select {
+    display: none;
+  }
+}

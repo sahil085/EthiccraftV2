@@ -5,13 +5,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  NbButtonModule, NbCardModule, NbIconModule, NbInputModule,
+  NbButtonModule, NbCardModule, NbContextMenuModule, NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
   NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
-  NbThemeModule
+  NbThemeModule, NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './components/login/login.component';
@@ -102,7 +102,9 @@ import {NgSelectModule} from '@ng-select/ng-select';
     NbIconModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    NbUserModule,
+    NbContextMenuModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
