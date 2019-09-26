@@ -1,6 +1,6 @@
 export class AppUrl {
 
-  // public static PAGE_PREFIX = 'page/';
+  public static PAGE_PREFIX = 'page/';
 
   public static DASHBOARD =  '';
 

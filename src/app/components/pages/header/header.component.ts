@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
       .subscribe(themeName => this.currentTheme = themeName);
     this.nbMenuService.onItemClick()
       .subscribe((item) => {
-        if (item.item.data.id === 'logout') { this.logout(); }
+        if (item.item.data && item.item.data.id === 'logout') { this.logout(); }
       });
   }
 

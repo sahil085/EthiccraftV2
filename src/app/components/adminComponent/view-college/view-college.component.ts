@@ -16,8 +16,6 @@ export class ViewCollegeComponent implements OnInit {
   ngOnInit() {
     this.collegeService.findAllColleges().subscribe(data => {
       this.collegeList = data;
-      console.log(JSON.stringify(data));
     });
   }
-
 }

@@ -22,7 +22,6 @@ export class AssignRoleComponent implements OnInit {
   updateColleges: any = [];
   emails: string[] = [];
   roles: string[] = [];
-  roleCA = 'CAMPUS AMBASSADOR';
   collegeList: College[] = [];
   userRoleCollegeMappingList: UserRoleCollegeMappingDTO[] = [];
   userRoleCollegeMapping: UserRoleCollegeMapping;
@@ -70,6 +69,7 @@ export class AssignRoleComponent implements OnInit {
       this.roleService.assignRole(userRoleCO).subscribe(data => {
         if (data.successMessage !== null) {
           this.showToaster(data.successMessage, data.type);
+          this.assignRoleForm.reset();
           this.findAllUserRole();
         } else {
           this.showToaster(data.errorMessage, data.type);

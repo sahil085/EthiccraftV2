@@ -12,24 +12,28 @@
             <th>Address</th>
             <th>City</th>
             <th>Faculty</th>
-            <th>Referrer Name</th>
-            <th>Referrer Contact</th>
             <th>Action</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let college of collegeList" class="p-h-md">
+          <tr *ngFor="let college of collegeList">
             <td>{{college.collegeName}}</td>
             <td>{{college.address}}</td>
             <td>{{college.city}}</td>
             <td>{{college.faculty}}</td>
-            <td>{{college.referencePersonName}}</td>
-            <td>{{college.referencePersonContact}}</td>
             <td>
-              <a title="Delete activity"><i class="fa fa-trash p-xs"></i></a>
-              <a title="Approve Activity"><i class="fa fa-check p-xs"></i></a>
-              <a title="Decline Activity"><i class="fa fa-times p-xs"></i></a>
-              <a routerLink="/admin/college/edit/{{college.id}}" title="Edit Activity"><i class="fa fa-pencil p-xs"></i></a>
+              <a title="Delete activity">
+                <nb-icon icon="trash-2-outline"></nb-icon>
+              </a>
+              <a title="Approve Activity">
+                <nb-icon icon="checkmark-circle-outline"></nb-icon>
+              </a>
+              <a title="Decline Activity">
+                <nb-icon icon="close-outline"></nb-icon>
+              </a>
+              <a routerLink="/page/admin/college/edit/{{college.id}}" style="color: #212529" title="Edit Activity">
+                <nb-icon icon="edit-2-outline"></nb-icon>
+              </a>
             </td>
           </tr>
           </tbody>

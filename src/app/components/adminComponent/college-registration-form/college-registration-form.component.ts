@@ -96,7 +96,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
           } else {
             this.showToaster(data['successMessage'], 'success');
             this.collegeFormGroup.reset();
-            this.router.navigateByUrl(AppUrl.VIEW_COLLEGE_ADMIN);
+            this.router.navigateByUrl(AppUrl.PAGE_PREFIX + AppUrl.VIEW_COLLEGE_ADMIN);
           }
         }
         ,

@@ -31,9 +31,14 @@ export class EditCollegeComponent implements OnInit {
     this.collegeId = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
-  onStateChange(value) {
-    this.cityList = csc.getCitiesOfState('' + value);
-    this.collegeFormGroup.get('city').setValue('');
+  onStateChange = (value) => {
+    if (value) {
+      this.collegeFormGroup.get('city').setValue(null);
+      this.cityList = csc.getCitiesOfState('' + value.id);
+    } else {
+      this.collegeFormGroup.get('city').setValue(null);
+      this.cityList = [];
+    }
   }
 
   ngOnInit() {
@@ -50,10 +55,11 @@ export class EditCollegeComponent implements OnInit {
     });
 
     this.collegeService.findCollegeById(this.collegeId).subscribe((data: College) => {
-      const stateId = this.stateList[this.stateList.findIndex((state) => state.id === data.state)].id;
+      console.log(data);
+      const stateId = this.stateList[this.stateList.findIndex((state) => state.name === data.state)].id;
       this.cityList = csc.getCitiesOfState('' + stateId);
       console.log(this.cityList);
-      const cityId = this.cityList[this.cityList.findIndex((city) => city.name === data.city)].name;
+      const cityId = this.cityList[this.cityList.findIndex((city) => city.name === data.city)].id;
       this.city = data.city;
       this.collegeFormGroup.get('collegeName').setValue(data.collegeName);
       this.collegeFormGroup.get('collegeAbbreviation').setValue(data.collegeAbbreviation);
@@ -101,6 +107,11 @@ export class EditCollegeComponent implements OnInit {
   submitForm() {
     if (this.collegeFormGroup.valid) {
       this.loading = true;
+      if (!isNaN(this.collegeFormGroup.value.state)) {
+        this.collegeFormGroup.value.state = this.stateList.filter((item) => {
+          return item.id === this.collegeFormGroup.value.state;
+        })[0].name;
+      }
       this.collegeService.updateCollegeInfo(this.collegeId, this.collegeFormGroup.value).subscribe((data) => {
           if (data['errorMessage'] !== null) {
             this.showToaster(data['errorMessage'], 'error');
@@ -108,7 +119,7 @@ export class EditCollegeComponent implements OnInit {
             this.showToaster(data['successMessage'], 'success');
             setTimeout(() => {
               this.loading = false;
-              this.router.navigate([AppUrl.VIEW_COLLEGE_ADMIN]);
+              this.router.navigate([AppUrl.PAGE_PREFIX + AppUrl.VIEW_COLLEGE_ADMIN]);
             }, 2000);
           }
         }, err => {
