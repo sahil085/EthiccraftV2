@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
 
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-    console.log(this.route.snapshot.queryParams.returnUrl);
     if (this.authService.isUserLoggedIn()) {
       this.router.navigate([this.returnUrl]);
     }

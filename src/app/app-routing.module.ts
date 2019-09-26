@@ -41,11 +41,6 @@ const routes: Routes = [
         data: {roles: Role.getAllRoles()}
       },
       {
-        path: 'membershipForm',
-        component: RegisterComponent,
-        data: {roles: Role.getAllRoles()}
-      },
-      {
         path: 'register',
         component: SignupComponent,
         data: {roles: Role.getAllRoles()}
@@ -132,7 +127,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: SignupComponent
-  }
+  },
+  {
+    path: 'membershipForm',
+    component: RegisterComponent
+  },
 ];
 
 const config: ExtraOptions = {

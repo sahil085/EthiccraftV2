@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../../services/security/authentication.service';
-import {NbSidebarService, NbThemeService} from '@nebular/theme';
+import {NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 import {map, takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
@@ -38,13 +38,14 @@ export class HeaderComponent implements OnInit {
 
   currentTheme = 'default';
 
-  userMenu = [{title: 'Profile'}, {title: 'Log out'}];
+  userMenu = [{title: 'Profile'}, {title: 'Log out',  data: { id: 'logout' }}];
   user: User = new User();
 
   constructor(private sidebarService: NbSidebarService,
               private authService: AuthenticationService,
               private themeService: NbThemeService,
-              private router: Router
+              private router: Router,
+              private nbMenuService: NbMenuService
   ) {
   }
 
@@ -58,6 +59,10 @@ export class HeaderComponent implements OnInit {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+    this.nbMenuService.onItemClick()
+      .subscribe((item) => {
+        if (item.item.data.id === 'logout') { this.logout(); }
+      });
   }
 
   logout() {

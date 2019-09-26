@@ -51,11 +51,19 @@ export class RegisterComponent implements OnInit {
           return item.id === this.membershipForm.value.state;
         })[0].name;
       }
+      this.membershipForm.value.contact = parseInt(this.membershipForm.value.contact, 10);
+      console.log(this.membershipForm.value);
     }
   }
 
   onStateChange = (value) => {
-    this.cityList = csc.getCitiesOfState('' + value.id);
+    if (value) {
+      this.membershipForm.get('city').setValue(null);
+      this.cityList = csc.getCitiesOfState('' + value.id);
+    } else {
+      this.membershipForm.get('city').setValue(null);
+      this.cityList = [];
+    }
   }
 
   fetchActiveCollege = () => {

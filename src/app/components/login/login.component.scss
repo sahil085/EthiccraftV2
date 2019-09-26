@@ -1,6 +1,11 @@
 nb-card {
   align-items: center;
   justify-content: center;
+  background-color: white;
+  margin: 20px;
+  padding: 20px 150px;
+  border-radius: 5px;
+  flex: 1;
 
   nb-card-body {
     width: fit-content;
@@ -13,5 +18,20 @@ nb-card {
       }
     }
   }
-
 }
+
+.layout {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: linear-gradient(to top, rgba(0, 31, 105, 0), rgba(0, 31, 105, 1));
+  min-width: 300px;
+  color: #1a2138;
+  font-family: Open Sans, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  min-height: 100vh;
+}
+
+

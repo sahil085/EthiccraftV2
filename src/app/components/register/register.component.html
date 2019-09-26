@@ -1,202 +1,214 @@
-<form [style.fontSize.px]="16" [formGroup]="membershipForm">
+<nb-layout>
+  <nb-layout-column>
+    <form [style.fontSize.px]="16" [formGroup]="membershipForm">
+      <nb-card>
+        <nb-card-body>
+          <h3>
+            Membership Form
+          </h3>
+          <div class="form-row">
+            <div class="col-form-label">
+              First Name
+            </div>
+            <div class="col-form-select">
+              <input
+                nbInput fullWidth
+                placeholder="First Name"
+                formControlName="firstName"
+                required>
+              <div
+                *ngIf="membershipForm.get('firstName').invalid && (membershipForm.get('firstName').dirty || membershipForm.get('firstName').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('firstName').hasError('required')">
+                  First Name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-form-label text-right">
+              Last Name
+            </div>
+            <div class="col-form-select">
+              <input
+                nbInput fullWidth
+                placeholder="Last Name"
+                formControlName="lastName"
+                required>
+              <div
+                *ngIf="membershipForm.get('lastName').invalid && (membershipForm.get('lastName').dirty || membershipForm.get('lastName').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('lastName').hasError('required')">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <div class="form-row">
-    <div class="col-form-label">
-      First Name
-    </div>
-    <div class="col-form-select">
-      <input
-        nbInput fullWidth
-        placeholder="First Name"
-        formControlName="firstName"
-        required>
-      <div
-        *ngIf="membershipForm.get('firstName').invalid && (membershipForm.get('firstName').dirty || membershipForm.get('firstName').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('firstName').hasError('required')">
-          First Name is required
-        </div>
-      </div>
-    </div>
-    <div class="col-form-label text-right">
-      Last Name
-    </div>
-    <div class="col-form-select">
-      <input
-        nbInput fullWidth
-        placeholder="Last Name"
-        formControlName="lastName"
-        required>
-      <div
-        *ngIf="membershipForm.get('lastName').invalid && (membershipForm.get('lastName').dirty || membershipForm.get('lastName').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('lastName').hasError('required')">
-          Last Name is required
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="form-row">
+            <div class="col-form-label">
+              Email
+            </div>
+            <div class="col-form-select">
+              <input
+                nbInput fullWidth
+                placeholder="Email"
+                formControlName="email"
+                required>
+              <div
+                *ngIf="membershipForm.get('email').invalid && (membershipForm.get('email').dirty || membershipForm.get('email').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('email').hasError('required')">
+                  Email is required
+                </div>
+                <div *ngIf="membershipForm.get('email').hasError('email')">
+                  Please enter correct email
+                </div>
+              </div>
+            </div>
+            <div class="col-form-label text-right">
+              Contact
+            </div>
+            <div class="col-form-select">
+              <input
+                nbInput fullWidth
+                placeholder="Contact"
+                formControlName="contact"
+                required>
+              <div
+                *ngIf="membershipForm.get('contact').invalid && (membershipForm.get('contact').dirty || membershipForm.get('contact').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('contact').hasError('required')">
+                  Please enter your Contact
+                </div>
+                <div *ngIf="membershipForm.get('contact').hasError('pattern')">
+                  Seems like it is a wrong number
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <div class="form-row">
-    <div class="col-form-label">
-      Email
-    </div>
-    <div class="col-form-select">
-      <input
-        nbInput fullWidth
-        placeholder="Email"
-        formControlName="email"
-        required>
-      <div
-        *ngIf="membershipForm.get('email').invalid && (membershipForm.get('email').dirty || membershipForm.get('email').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('email').hasError('required')">
-          Email is required
-        </div>
-        <div *ngIf="membershipForm.get('email').hasError('email')">
-          Please enter correct email
-        </div>
-      </div>
-    </div>
-    <div class="col-form-label text-right">
-      Contact
-    </div>
-    <div class="col-form-select">
-      <input
-        nbInput fullWidth
-        placeholder="Contact"
-        formControlName="contact"
-        required>
-      <div
-        *ngIf="membershipForm.get('contact').invalid && (membershipForm.get('contact').dirty || membershipForm.get('contact').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('contact').hasError('required')">
-          Please enter your Contact
-        </div>
-        <div *ngIf="membershipForm.get('contact').hasError('pattern')">
-          Seems like it is a wrong number
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="form-row">
+            <div class="col-form-label">
+              Gender
+            </div>
+            <div class="col-form-select">
+              <ng-select
+                [items]="genderList"
+                formControlName="gender"
+                [selectOnTab]="true"
+                appendTo="body"
+                placeholder="Gender"
+              >
+              </ng-select>
+              <div
+                *ngIf="membershipForm.get('gender').invalid && (membershipForm.get('gender').dirty || membershipForm.get('gender').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('gender').hasError('required')">
+                  Gender is required
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <div class="form-row">
-    <div class="col-form-label">
-      Gender
-    </div>
-    <div class="col-form-select">
-      <ng-select
-        [items]="genderList"
-        formControlName="gender"
-        [selectOnTab]="true"
-        appendTo="body"
-        placeholder="Gender"
-      >
-      </ng-select>
-      <div
-        *ngIf="membershipForm.get('gender').invalid && (membershipForm.get('gender').dirty || membershipForm.get('gender').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('gender').hasError('required')">
-          State is required
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="form-row">
+            <div class="col-form-label">
+              Address
+            </div>
+            <div class="col-form-input">
+              <input
+                nbInput fullWidth
+                placeholder="Address"
+                formControlName="address"
+                required>
+              <div
+                *ngIf="membershipForm.get('address').invalid && (membershipForm.get('address').dirty || membershipForm.get('address').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('address').hasError('required')">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <div class="form-row">
-    <div class="col-form-label">
-      Address
-    </div>
-    <div class="col-form-input">
-      <input
-        nbInput fullWidth
-        placeholder="Address"
-        formControlName="address"
-        required>
-      <div
-        *ngIf="membershipForm.get('address').invalid && (membershipForm.get('address').dirty || membershipForm.get('address').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('address').hasError('required')">
-          Address is required
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-row">
-    <div class="col-form-label">
-      State
-    </div>
-    <div class="col-form-select">
-      <ng-select
-        [items]="stateList"
-        formControlName="state"
-        [selectOnTab]="true"
-        bindLabel="name"
-        bindValue="id"
-        appendTo="body"
-        (change)="onStateChange($event)"
-        placeholder="State"
-      >
-      </ng-select>
-      <div
-        *ngIf="membershipForm.get('state').invalid && (membershipForm.get('state').dirty || membershipForm.get('state').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('state').hasError('required')">
-          State is required
-        </div>
-      </div>
-    </div>
-    <div class="col-form-label text-right">
-      City
-    </div>
-    <div class="col-form-select">
-      <ng-select
-        [items]="cityList"
-        formControlName="city"
-        [selectOnTab]="true"
-        appendTo="body"
-        bindLabel="name"
-        bindValue="name"
-        placeholder="City"
-      >
-      </ng-select>
-      <div
-        *ngIf="membershipForm.get('city').invalid && (membershipForm.get('city').dirty || membershipForm.get('city').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('city').hasError('required')">
-          City is required
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="form-row">
+            <div class="col-form-label">
+              State
+            </div>
+            <div class="col-form-select">
+              <ng-select
+                [items]="stateList"
+                formControlName="state"
+                [selectOnTab]="true"
+                bindLabel="name"
+                bindValue="id"
+                appendTo="body"
+                (change)="onStateChange($event)"
+                placeholder="State"
+              >
+              </ng-select>
+              <div
+                *ngIf="membershipForm.get('state').invalid && (membershipForm.get('state').dirty || membershipForm.get('state').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('state').hasError('required')">
+                  State is required
+                </div>
+              </div>
+            </div>
+            <div class="col-form-label text-right">
+              City
+            </div>
+            <div class="col-form-select">
+              <ng-select
+                [items]="cityList"
+                formControlName="city"
+                [selectOnTab]="true"
+                appendTo="body"
+                bindLabel="name"
+                bindValue="name"
+                placeholder="City"
+              >
+              </ng-select>
+              <div
+                *ngIf="membershipForm.get('city').invalid && (membershipForm.get('city').dirty || membershipForm.get('city').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('city').hasError('required')">
+                  City is required
+                </div>
+              </div>
+            </div>
+          </div>
 
 
-  <div class="form-row">
-    <div class="col-form-label">
-      College
-    </div>
-    <div class="col-form-input">
-      <ng-select
-        [items]="collegeList"
-        formControlName="college"
-        bindLabel="collegeName"
-        bindValue="id"
-        [selectOnTab]="true"
-        appendTo="body"
-        placeholder="College"
-      >
-      </ng-select>
-      <div
-        *ngIf="membershipForm.get('college').invalid && (membershipForm.get('college').dirty || membershipForm.get('college').touched)"
-        class="validation-msg">
-        <div *ngIf="membershipForm.get('college').hasError('required')">
-          Please enter your College
-        </div>
-      </div>
-    </div>
-  </div>
+          <div class="form-row">
+            <div class="col-form-label">
+              College
+            </div>
+            <div class="col-form-input">
+              <ng-select
+                [items]="collegeList"
+                formControlName="college"
+                bindLabel="collegeName"
+                bindValue="id"
+                [selectOnTab]="true"
+                appendTo="body"
+                placeholder="College"
+              >
+              </ng-select>
+              <div
+                *ngIf="membershipForm.get('college').invalid && (membershipForm.get('college').dirty || membershipForm.get('college').touched)"
+                class="validation-msg">
+                <div *ngIf="membershipForm.get('college').hasError('required')">
+                  College is required
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <button (click)="register()" nbButton>Register</button>
 
-</form>
+        </nb-card-body>
+        <nb-card-footer>
+          <button (click)="register()" nbButton>Register</button>
+        </nb-card-footer>
+      </nb-card>
+    </form>
+  </nb-layout-column>
+</nb-layout>
