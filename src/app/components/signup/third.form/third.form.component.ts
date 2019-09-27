@@ -27,13 +27,20 @@ export class ThirdFormComponent implements OnInit {
   }
 
   setOtherCollege(value) {
-    // this.clg.selectionModel[0].value
-    this.newCollegeEntry = value === 'other';
+    console.log(value);
+    this.newCollegeEntry = value.id === 0;
     if (this.newCollegeEntry) {
       this.thirdFormGroup.get('unregisteredCollege').enable();
+      this.thirdFormGroup.get('unregisteredCollege').setValue(value.unregisteredCollege);
     } else {
       this.thirdFormGroup.get('unregisteredCollege').disable();
     }
   }
+
+  addCustomCollege = (term) => ({
+    id: 0,
+    unregisteredCollege: term,
+    collegeName: term
+  })
 
 }

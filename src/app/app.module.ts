@@ -47,6 +47,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthHttpInterceptorService} from './services/security/auth-http-interceptor.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule, POSITION, SPINNER } from 'ngx-ui-loader';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  fgsColor: '#00bf98',
+  fgsPosition: POSITION.centerCenter,
+  fgsSize: 60,
+  fgsType: SPINNER.threeStrings,
+  logoUrl: 'assets/img/ethiccraft.png',
+  pbColor: '#00bf98'
+};
 
 @NgModule({
   declarations: [
@@ -104,7 +114,10 @@ import {NgSelectModule} from '@ng-select/ng-select';
     NbSidebarModule.forRoot(),
     NgSelectModule,
     NbUserModule,
-    NbContextMenuModule
+    NbContextMenuModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule.forRoot({showForeground: true}),
+    NgxUiLoaderHttpModule.forRoot({showForeground:true})
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

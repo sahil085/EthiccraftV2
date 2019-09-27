@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import csc, {ICity, IState} from 'country-state-city';
 import {CollegeService} from '../../services/college.service';
 import {College} from '../../models/college';
-import alert from "sweetalert2";
+import alert from 'sweetalert2';
+import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private collegeService: CollegeService
+    private collegeService: CollegeService,
+    private ngxService: NgxUiLoaderService
   ) {
     this.stateList = csc.getStatesOfCountry('101');
     this.genderList = ['Male', 'Female'];
@@ -47,6 +49,8 @@ export class RegisterComponent implements OnInit {
     if (this.membershipForm.invalid) {
       this.membershipForm.markAllAsTouched();
     } else {
+      const taskId = new Date().getTime().toString();
+      this.ngxService.startLoader('childLoader', taskId);
       if (!isNaN(this.membershipForm.value.state)) {
         this.membershipForm.value.state = this.stateList.filter((item) => {
           return item.id === this.membershipForm.value.state;
@@ -54,6 +58,7 @@ export class RegisterComponent implements OnInit {
       }
       this.membershipForm.value.contact = parseInt(this.membershipForm.value.contact, 10);
       console.log(this.membershipForm.value);
+      this.ngxService.stopLoader('childLoader', taskId);
       this.membershipForm.reset();
     }
   }
