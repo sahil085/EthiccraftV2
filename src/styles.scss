@@ -2,7 +2,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import '~@nebular/theme/styles/globals';
 @import "~@ng-select/ng-select/themes/default.theme.css";
-
 @include nb-install() {
   @include nb-theme-global();
 }
@@ -16,7 +15,6 @@ $border-dark: rgba($base-color, 0.5);
 nb-card {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 }
 
 nb-card-body {

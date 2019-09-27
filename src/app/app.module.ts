@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  NbButtonModule, NbCardModule, NbContextMenuModule, NbIconModule, NbInputModule,
+  NbButtonModule, NbCardModule, NbContextMenuModule, NbDialogModule, NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
   NbSelectModule,
@@ -47,7 +47,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthHttpInterceptorService} from './services/security/auth-http-interceptor.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
-
+import {AgGridModule} from 'ag-grid-angular';
+import { ViewCollegeActionComponent } from './components/button-components/view-college-action/view-college-action.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
     KeysPipe,
     PendingMembersComponent,
     AccessDeniedComponent,
-    DashboardComponent
+    DashboardComponent,
+    ViewCollegeActionComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +106,12 @@ import {NgSelectModule} from '@ng-select/ng-select';
     NbSidebarModule.forRoot(),
     NgSelectModule,
     NbUserModule,
+    NbDialogModule.forRoot({}),
+    AgGridModule.forRoot({}),
     NbContextMenuModule
+  ],
+  entryComponents: [
+    ViewCollegeActionComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

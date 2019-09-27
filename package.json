@@ -23,6 +23,8 @@
     "@nebular/eva-icons": "4.3.1",
     "@nebular/theme": "^4.3.1",
     "@ng-select/ng-select": "^3.0.7",
+    "ag-grid-angular": "^21.2.1",
+    "ag-grid-community": "^21.2.1",
     "bootstrap": "^4.3.1",
     "country-state-city": "^1.0.0",
     "eva-icons": "^1.1.1",
