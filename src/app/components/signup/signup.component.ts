@@ -93,6 +93,7 @@ export class SignupComponent implements OnInit {
     if (this.firstFormGroup.invalid || this.secondFormGroup.invalid || this.thirdFormGroup.invalid || this.fourthFormGroup.invalid) {
 
     } else {
+      this.secondFormGroup.get('permanentAddress').enable();
       this.formData = {
         ...this.firstFormGroup.value,
         ...this.secondFormGroup.value,

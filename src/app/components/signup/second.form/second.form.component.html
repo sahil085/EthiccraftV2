@@ -114,7 +114,9 @@
       </div>
     </div>
   </div>
-
+  <nb-toggle [(ngModel)]="sameAddress" [ngModelOptions]="{standalone: true}" (checkedChange)="toggleSameAddress()">
+    My Present Address and Permanent Address are Same
+  </nb-toggle>
   <div formGroupName="permanentAddress">
     <h5>Permanent Address</h5>
     <div class="form-row">

@@ -11,7 +11,7 @@ import {
   NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
-  NbThemeModule, NbUserModule
+  NbThemeModule, NbToggleModule, NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './components/login/login.component';
@@ -117,7 +117,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NbContextMenuModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule.forRoot({showForeground: true}),
-    NgxUiLoaderHttpModule.forRoot({showForeground:true})
+    NgxUiLoaderHttpModule.forRoot({showForeground: true}),
+    NbToggleModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
