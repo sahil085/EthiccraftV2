@@ -2,11 +2,11 @@
   <nb-card-header >College List</nb-card-header>
   <nb-card-body>
     <ag-grid-angular
-      style="width: 100%;height: 50vh"
       class="ag-theme-balham"
       [rowData]="rowData"
+      [pagination]="true"
       [columnDefs]="columnDefs"
-      rowHeight="auto"
+      [animateRows]="true"
       (gridReady)="onGridReady($event)"
     >
     </ag-grid-angular>

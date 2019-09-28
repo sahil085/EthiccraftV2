@@ -8,6 +8,8 @@ import {CollegeService} from '../../../services/college.service';
 import {Role} from '../../../constants/Role';
 import alert from 'sweetalert2';
 import {NbSelectModule} from '@nebular/theme';
+import {ViewPendingMemberActionComponent} from '../../button-components/view-pending-member-action/view-pending-member-action.component';
+import {ViewAssignRoleActionComponent} from '../../button-components/view-assign-role-action/view-assign-role-action.component';
 
 
 @Component({
@@ -18,6 +20,9 @@ import {NbSelectModule} from '@nebular/theme';
 })
 export class AssignRoleComponent implements OnInit {
 
+  columnDefs: any;
+  private gridApi;
+  private gridColumnApi;
   assignRoleForm: FormGroup;
   updateColleges: any = [];
   emails: string[] = [];
@@ -43,6 +48,24 @@ export class AssignRoleComponent implements OnInit {
     this.fetchAllEmails();
     this.fetchActiveCollege();
     this.findAllUserRole();
+    this.createGrid();
+  }
+
+  createGrid() {
+    this.columnDefs = [
+      {
+        headerName: 'User Name', field: 'userName',
+        sortable: true, filter: true
+      },
+      {headerName: 'Email ID', field: 'userEmail', sortable: true, filter: true},
+      {headerName: 'Role', field: 'role', sortable: true, filter: true},
+      {headerName: 'College', field: 'collegeName', sortable: true, filter: true},
+      {
+        headerName: 'Actions',
+        field: 'action',
+        cellRendererFramework: ViewAssignRoleActionComponent,
+      }
+    ];
   }
 
   fetchActiveCollege = () => {
@@ -79,24 +102,6 @@ export class AssignRoleComponent implements OnInit {
     }
   }
 
-  update() {
-    if (this.updateColleges.length > 0) {
-      const userRoleCO = {
-        id: this.userRoleCollegeMapping.id,
-        username: this.userRoleCollegeMapping.user.email,
-        role: this.userRoleCollegeMapping.role.role,
-        colleges: this.updateColleges || []
-      };
-      this.roleService.updateUserRoleCollegeMapping(userRoleCO).subscribe(data => {
-        if (data.successMessage !== null) {
-          this.showToaster(data.successMessage, data.type);
-          this.findAllUserRole();
-        } else {
-          this.showToaster(data.errorMessage, data.type);
-        }
-      });
-    }
-  }
 
 
   findAllUserRole = () => {
@@ -105,43 +110,18 @@ export class AssignRoleComponent implements OnInit {
     });
   }
 
-  deleteUserRole = (id) => {
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    params.api.sizeColumnsToFit();
+    params.api.setGridAutoHeight(true);
 
-    alert.fire({
-      title: 'Are you sure?',
-      text: 'Are you sure you want to delete the user role ?',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
-      if (result.value) {
-        this.roleService.deleteUserRole(id).subscribe(data => {
-          if (data.successMessage !== null) {
-            this.showToaster(data.successMessage, data.type);
-          } else {
-            this.showToaster(data.errorMessage, data.type);
-          }
-          this.findAllUserRole();
-        });
-      }
-      // else if (result.dismiss === alert.fire().DismissReason.cancel) {
-      //   alert.fire(
-      //     'Cancelled',
-      //     'Operation canceled)',
-      //     'error'
-      //   );
-      // }
-    });
+    window.addEventListener('resize', function () {
+      setTimeout(function () {
+        params.api.sizeColumnsToFit();
+        params.api.setGridAutoHeight(true);
 
-  }
-
-
-  editUserRoleMapping(id) {
-
-    this.roleService.findUserRoleById(id).subscribe(data => {
-      this.userRoleCollegeMapping = data;
-      this.updateColleges = this.userRoleCollegeMapping.collegeList.map(data1 => data1.id);
+      });
     });
   }
 

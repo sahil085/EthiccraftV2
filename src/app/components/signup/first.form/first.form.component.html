@@ -56,10 +56,13 @@
       Gender
     </div>
     <div class="col-form-input">
-      <nb-select placeholder="Gender" formControlName="gender" required>
-        <nb-option [value]="'Male'">Male</nb-option>
-        <nb-option [value]="'Female'">Female</nb-option>
-      </nb-select>
+      <ng-select
+        [items]="['Male', 'Female']"
+        formControlName="gender"
+        [selectOnTab]="true"
+        appendTo="body"
+        placeholder="Gender"
+      ></ng-select>
       <div
         *ngIf="firstFormGroup.get('gender').invalid && (firstFormGroup.get('gender').dirty || firstFormGroup.get('gender').touched)"
         class="validation-msg">

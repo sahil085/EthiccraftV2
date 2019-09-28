@@ -26,7 +26,7 @@ export class AppUrl {
 
   public static VIEW_COLLEGE_ADMIN =  'admin/college/view';
 
-  public static PENDING_MEMBER_REQUEST =  'pending/members';
+  public static PENDING_MEMBER_REQUEST =  'pending-members';
   public static REGISTER_MEMBER =  'register';
   public static LOGIN =  'login';
   public static ACCESS_DENIED =  'access-dined';

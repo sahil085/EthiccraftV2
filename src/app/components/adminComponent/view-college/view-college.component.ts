@@ -48,7 +48,8 @@ this.createGrid();
       {headerName: 'Faculty', field: 'faculty', sortable: true, filter: true},
       {headerName: 'State', field: 'state', sortable: true, filter: true},
       {headerName: 'City', field: 'city', sortable: true, filter: true},
-      {headerName: 'Actions',
+      {
+        headerName: 'Actions',
         cellRendererFramework: ViewCollegeActionComponent,
         field: 'action'
       }
@@ -59,15 +60,15 @@ this.createGrid();
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     params.api.sizeColumnsToFit();
+    params.api.setGridAutoHeight(true);
 
-    params.api.sizeColumnsToFit();
     window.addEventListener('resize', function () {
       setTimeout(function () {
         params.api.sizeColumnsToFit();
+        params.api.setGridAutoHeight(true);
+
       });
     });
-
-
     this.collegeService.findAllColleges().subscribe((data) => {
       this.collegeList = data;
       this.rowData = data;

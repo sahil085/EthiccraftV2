@@ -11,7 +11,7 @@ import {
   NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
-  NbThemeModule, NbUserModule
+  NbThemeModule, NbToggleModule, NbUserModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './components/login/login.component';
@@ -49,6 +49,19 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {AgGridModule} from 'ag-grid-angular';
 import { ViewCollegeActionComponent } from './components/button-components/view-college-action/view-college-action.component';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule, POSITION, SPINNER } from 'ngx-ui-loader';
+import { ViewPendingMemberActionComponent } from './components/button-components/view-pending-member-action/view-pending-member-action.component';
+import { ViewAssignRoleActionComponent } from './components/button-components/view-assign-role-action/view-assign-role-action.component';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  fgsColor: '#00bf98',
+  fgsPosition: POSITION.centerCenter,
+  fgsSize: 60,
+  fgsType: SPINNER.threeStrings,
+  logoUrl: 'assets/img/ethiccraft.png',
+  pbColor: '#00bf98'
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +97,9 @@ import { ViewCollegeActionComponent } from './components/button-components/view-
     PendingMembersComponent,
     AccessDeniedComponent,
     DashboardComponent,
-    ViewCollegeActionComponent
+    ViewCollegeActionComponent,
+    ViewPendingMemberActionComponent,
+    ViewAssignRoleActionComponent
   ],
   imports: [
     BrowserModule,
@@ -108,10 +123,16 @@ import { ViewCollegeActionComponent } from './components/button-components/view-
     NbUserModule,
     NbDialogModule.forRoot({}),
     AgGridModule.forRoot({}),
-    NbContextMenuModule
+    NbContextMenuModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgxUiLoaderRouterModule.forRoot({showForeground: true}),
+    NgxUiLoaderHttpModule.forRoot({showForeground: true}),
+    NbToggleModule
   ],
   entryComponents: [
-    ViewCollegeActionComponent
+    ViewCollegeActionComponent,
+    ViewPendingMemberActionComponent,
+    ViewAssignRoleActionComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

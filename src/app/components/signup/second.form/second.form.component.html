@@ -43,6 +43,7 @@
       </div>
     </div>
   </div>
+
   <div formGroupName="presentAddress">
     <h5>Present Address</h5>
     <div class="form-row">
@@ -64,60 +65,58 @@
         </div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="col-form-label">
-        Country
-      </div>
-      <div class="col-form-input">
-        <nb-select placeholder="Country" formControlName="country" required>
-          <nb-option selected value="India">India</nb-option>
-        </nb-select>
-        <div
-          *ngIf="secondFormGroup.get('presentAddress').get('country').invalid && (secondFormGroup.get('presentAddress').get('country').dirty || secondFormGroup.get('presentAddress').get('country').touched)"
-          class="validation-msg">
-          <div *ngIf="secondFormGroup.get('presentAddress').get('country').hasError('required')">
-            Please enter your country
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div class="form-row">
       <div class="col-form-label">
         State
       </div>
-      <div class="col-form-input">
-        <nb-select (selectedChange)="onPresentStateChange($event)" placeholder="State" formControlName="state"
-                   required>
-          <nb-option *ngFor="let state of presentStateList" [value]="state.id">{{state.name}}</nb-option>
-        </nb-select>
+      <div class="col-form-select">
+        <ng-select
+          [items]="presentStateList"
+          formControlName="state"
+          [selectOnTab]="true"
+          bindLabel="name"
+          bindValue="id"
+          appendTo="body"
+          (change)="onPresentStateChange($event)"
+          placeholder="State"
+        >
+        </ng-select>
         <div
           *ngIf="secondFormGroup.get('presentAddress').get('state').invalid && (secondFormGroup.get('presentAddress').get('state').dirty || secondFormGroup.get('presentAddress').get('state').touched)"
           class="validation-msg">
           <div *ngIf="secondFormGroup.get('presentAddress').get('state').hasError('required')">
-            Please enter your state
+            State is required
           </div>
         </div>
       </div>
-    </div>
-    <div class="form-row">
-      <div class="col-form-label">
+      <div class="col-form-label text-right">
         City
       </div>
-      <div class="col-form-input">
-        <nb-select placeholder="City" formControlName="city" required>
-          <nb-option *ngFor="let city of presentCityList" [value]="city.name">{{city.name}}</nb-option>
-        </nb-select>
+      <div class="col-form-select">
+        <ng-select
+          [items]="presentCityList"
+          formControlName="city"
+          [selectOnTab]="true"
+          appendTo="body"
+          bindLabel="name"
+          bindValue="name"
+          placeholder="City"
+        >
+        </ng-select>
         <div
           *ngIf="secondFormGroup.get('presentAddress').get('city').invalid && (secondFormGroup.get('presentAddress').get('city').dirty || secondFormGroup.get('presentAddress').get('city').touched)"
           class="validation-msg">
           <div *ngIf="secondFormGroup.get('presentAddress').get('city').hasError('required')">
-            Please enter your city
+            City is required
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  <nb-toggle [(ngModel)]="sameAddress" [ngModelOptions]="{standalone: true}" (checkedChange)="toggleSameAddress()">
+    My Present Address and Permanent Address are Same
+  </nb-toggle>
   <div formGroupName="permanentAddress">
     <h5>Permanent Address</h5>
     <div class="form-row">
@@ -140,62 +139,54 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <div class="col-form-label">
-        Country
-      </div>
-      <div class="col-form-input">
-        <nb-select placeholder="Country" formControlName="country" required>
-          <nb-option selected value="India">India</nb-option>
-        </nb-select>
-        <div
-          *ngIf="secondFormGroup.get('permanentAddress').get('country').invalid && (secondFormGroup.get('permanentAddress').get('country').dirty || secondFormGroup.get('permanentAddress').get('country').touched)"
-          class="validation-msg">
-          <div *ngIf="secondFormGroup.get('permanentAddress').get('country').hasError('required')">
-            Please enter your country
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="form-row">
       <div class="col-form-label">
         State
       </div>
-      <div class="col-form-input">
-        <nb-select (selectedChange)="onPermanentStateChange($event)" placeholder="State" formControlName="state"
-                   required>
-          <nb-option *ngFor="let state of permanentStateList" [value]="state.id">{{state.name}}</nb-option>
-        </nb-select>
+      <div class="col-form-select">
+        <ng-select
+          [items]="permanentStateList"
+          formControlName="state"
+          [selectOnTab]="true"
+          bindLabel="name"
+          bindValue="id"
+          appendTo="body"
+          (change)="onPermanentStateChange($event)"
+          placeholder="State"
+        >
+        </ng-select>
         <div
           *ngIf="secondFormGroup.get('permanentAddress').get('state').invalid && (secondFormGroup.get('permanentAddress').get('state').dirty || secondFormGroup.get('permanentAddress').get('state').touched)"
           class="validation-msg">
           <div *ngIf="secondFormGroup.get('permanentAddress').get('state').hasError('required')">
-            Please enter your state
+            State is required
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="form-row">
-      <div class="col-form-label">
+      <div class="col-form-label text-right">
         City
       </div>
-      <div class="col-form-input">
-        <nb-select placeholder="City" formControlName="city" required>
-          <nb-option *ngFor="let city of permanentCityList" [value]="city.name">{{city.name}}</nb-option>
-        </nb-select>
+      <div class="col-form-select">
+        <ng-select
+          [items]="permanentCityList"
+          formControlName="city"
+          [selectOnTab]="true"
+          appendTo="body"
+          bindLabel="name"
+          bindValue="name"
+          placeholder="City"
+        >
+        </ng-select>
         <div
           *ngIf="secondFormGroup.get('permanentAddress').get('city').invalid && (secondFormGroup.get('permanentAddress').get('city').dirty || secondFormGroup.get('permanentAddress').get('city').touched)"
           class="validation-msg">
           <div *ngIf="secondFormGroup.get('permanentAddress').get('city').hasError('required')">
-            Please enter your city
+            City is required
           </div>
         </div>
       </div>
     </div>
-
-
 
 
   </div>

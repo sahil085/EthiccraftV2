@@ -5,7 +5,7 @@ import csc from 'country-state-city';
 import {CollegeService} from '../../../services/college.service';
 import alert from 'sweetalert2';
 import {AppUrl} from '../../../constants/AppUrl';
-
+import {NgxUiLoaderService} from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-college-registration-form',
@@ -32,7 +32,8 @@ export class CollegeRegistrationFormComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private collegeService: CollegeService
+              private collegeService: CollegeService,
+              private ngxService: NgxUiLoaderService
   ) { }
 
   ngOnInit() {
@@ -84,6 +85,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
 
   submitForm = () => {
     if (this.collegeFormGroup.valid) {
+      this.ngxService.startLoader('childLoader');
       if (!isNaN(this.collegeFormGroup.value.state)) {
         this.collegeFormGroup.value.state = this.stateList.filter((item) => {
           return item.id === this.collegeFormGroup.value.state;
@@ -91,6 +93,7 @@ export class CollegeRegistrationFormComponent implements OnInit {
       }
       this.collegeService.registerCollege(this.collegeFormGroup.value).subscribe(
         (data) => {
+          this.ngxService.stopLoader('childLoader');
           if (data['errorMessage'] !== null) {
             this.showToaster(data['errorMessage'], 'error');
           } else {

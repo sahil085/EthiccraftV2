@@ -20,6 +20,10 @@ export class ViewCollegeActionComponent {
     this.params = params;
   }
 
+  refresh(): boolean {
+    return false;
+  }
+
   editCollege() {
     const rowData = this.params;
     this.router.navigate(['/page/admin/college/edit/' + rowData.data.id]);
@@ -35,5 +39,7 @@ export class ViewCollegeActionComponent {
     console.log(rowData.data);
     this.dialogService.open(dialog, { context: rowData.data});
   }
+
+
 
 }
