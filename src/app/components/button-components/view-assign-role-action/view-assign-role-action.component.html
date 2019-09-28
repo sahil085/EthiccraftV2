@@ -1,0 +1,22 @@
+<nb-icon title="Edit Role" *ngIf="params.data.collegeName && roleCA !== params.data.role" style="cursor: pointer" (click)="editUserRoleCollegeMapping(dialog)"
+         icon="edit-outline"></nb-icon>
+<nb-icon title="Delete Role" style="cursor: pointer" (click)="deleteUserRole(params)" icon="trash-2-outline"></nb-icon>
+
+
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header class="text-center"> | Edit College | </nb-card-header>
+    <nb-card-body style="width: 100%;height: 100%">
+      <label for="updateUserRoleCollegeMapping">Colleges</label>
+      <ng-select id="updateUserRoleCollegeMapping" required  [(ngModel)]="updateColleges" [multiple]="true">
+        <ng-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</ng-option>
+      </ng-select>
+      <h6 class="red-bg font-weight-bold" *ngIf="updateColleges.length === 0">Required field</h6>
+
+    </nb-card-body>
+    <nb-card-footer>
+      <button  style="float: right" nbButton (click)="update(data)">Update</button>
+      <button style="float: right" nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
