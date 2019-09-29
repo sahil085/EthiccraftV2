@@ -58,6 +58,7 @@ export class PendingMembersComponent implements OnInit {
       {headerName: 'Course', field: 'courseName', sortable: true, filter: true},
       {headerName: 'Batch', field: 'batch', sortable: true, filter: true},
       {headerName: 'College', field: 'college.collegeName', sortable: true, filter: true},
+      {headerName: 'Un-Registered College', field: 'unRegisteredCollege', sortable: true, filter: true},
       {
         headerName: 'Actions',
         field: 'action',

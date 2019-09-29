@@ -1,0 +1,16 @@
+<nb-card>
+  <nb-card-header>Member List</nb-card-header>
+  <nb-card-body>
+    <ag-grid-angular
+      class="ag-theme-balham"
+      style=" width: 100%;"
+      [pagination]="true"
+      [rowData]="membersList"
+      [columnDefs]="columnDefs"
+      [animateRows]="true"
+      [enableCellChangeFlash]="true"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </nb-card-body>
+</nb-card>

@@ -5,6 +5,8 @@ import {CollegeService} from '../../services/college.service';
 import {College} from '../../models/college';
 import alert from 'sweetalert2';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
+import {MemberService} from '../../services/member.service';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +20,13 @@ export class RegisterComponent implements OnInit {
   cityList: ICity[] = [];
   collegeList: College[] = [];
   genderList: string[];
+  newCollegeEntry: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private collegeService: CollegeService,
-    private ngxService: NgxUiLoaderService
+    private ngxService: NgxUiLoaderService,
+    private memberService: MemberService
   ) {
     this.stateList = csc.getStatesOfCountry('101');
     this.genderList = ['Male', 'Female'];
@@ -38,8 +42,9 @@ export class RegisterComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       college: ['', Validators.required],
+      unRegisteredCollege: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      contact: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]]
+      mobileNumber: ['', [Validators.required, Validators.pattern('[6-9]\\d{9}')]]
     });
 
     this.fetchActiveCollege();
@@ -50,16 +55,24 @@ export class RegisterComponent implements OnInit {
       this.membershipForm.markAllAsTouched();
     } else {
       const taskId = new Date().getTime().toString();
-      this.ngxService.startLoader('childLoader', taskId);
       if (!isNaN(this.membershipForm.value.state)) {
         this.membershipForm.value.state = this.stateList.filter((item) => {
           return item.id === this.membershipForm.value.state;
         })[0].name;
       }
-      this.membershipForm.value.contact = parseInt(this.membershipForm.value.contact, 10);
-      console.log(this.membershipForm.value);
-      this.ngxService.stopLoader('childLoader', taskId);
-      this.membershipForm.reset();
+      this.memberService.quickRegister(this.membershipForm.value).subscribe(
+        data => {
+          this.membershipForm.reset();
+          if (data.successMessage) {
+              AppComponent.showToaster(data.successMessage, data.type);
+            } else {
+              AppComponent.showToaster(data.errorMessage, data.type);
+            }
+        }, err => {
+          this.membershipForm.reset();
+          AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+        }
+      );
     }
   }
 
@@ -72,6 +85,23 @@ export class RegisterComponent implements OnInit {
       this.cityList = [];
     }
   }
+
+  setOtherCollege(value) {
+    console.log(value);
+    this.newCollegeEntry = value.id === 0;
+    if (this.newCollegeEntry) {
+      this.membershipForm.get('unRegisteredCollege').enable();
+      this.membershipForm.get('unRegisteredCollege').setValue(value.unRegisteredCollege);
+    } else {
+      this.membershipForm.get('unRegisteredCollege').disable();
+    }
+  }
+
+  addCustomCollege = (term) => ({
+    id: 0,
+    unRegisteredCollege: term,
+    collegeName: term
+  })
 
   fetchActiveCollege = () => {
     this.collegeService.findCollegeDropDown().subscribe(

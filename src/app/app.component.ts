@@ -34,8 +34,7 @@ export class AppComponent {
   public static showToaster = (message, type) => {
     alert.fire({
       title: message,
-      type: type,
-      timer: 1500
+      type: type
     });
   }
 

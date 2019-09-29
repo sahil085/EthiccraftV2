@@ -22,6 +22,7 @@ import {PendingMembersComponent} from './components/pending-members/pending-memb
 import {RequestActivityComponent} from './components/CAComponent/request-activity/request-activity.component';
 import {ViewCAActivityComponent} from './components/CAComponent/view-activity/view-c-a-activity.component';
 import {SignupComponent} from './components/signup/signup.component';
+import {MemberListComponent} from './components/pages/member-list/member-list.component';
 
 const routes: Routes = [
   {
@@ -87,9 +88,9 @@ const routes: Routes = [
         data: {roles: [Role.userRoles.CAMPUS_AMBASSADOR]}
       },
       {
-        path: 'ca/member/view',
-        component: ViewCAMembersComponent,
-        data: {roles: [Role.userRoles.CAMPUS_AMBASSADOR]}
+        path: 'member/view',
+        component: MemberListComponent,
+        data: {roles: [Role.userRoles.CAMPUS_AMBASSADOR, Role.userRoles.ADMIN]}
       },
       {
         path: 'ca/member/markAttendance/:activityId',
@@ -110,6 +111,10 @@ const routes: Routes = [
         path: 'pending-members',
         component: PendingMembersComponent,
         data: {roles: [Role.userRoles.ADMIN, Role.userRoles.CAMPUS_AMBASSADOR]}
+      },
+      {
+        path: 'membershipForm',
+        component: RegisterComponent
       }
 
     ]

@@ -9,7 +9,7 @@ import {UserRoleCollegeMapping} from '../../../models/UserRoleCollegeMapping';
 import {AppComponent} from '../../../app.component';
 import {Role} from '../../../constants/Role';
 import {Constant} from '../../../constants';
-import alert from "sweetalert2";
+import alert from 'sweetalert2';
 
 @Component({
   selector: 'app-view-assign-role-action',
@@ -18,7 +18,7 @@ import alert from "sweetalert2";
 })
 export class ViewAssignRoleActionComponent {
 
-  private params: any;
+   params: any;
   collegeList: College[] = [];
   userRoleCollegeMappingList: UserRoleCollegeMappingDTO[] = [];
   userRoleCollegeMapping: UserRoleCollegeMapping;
@@ -29,7 +29,6 @@ export class ViewAssignRoleActionComponent {
 
   agInit(params: any): void {
     this.params = params;
-    console.log(this.params);
   }
 
   fetchActiveCollege = () => {
@@ -46,7 +45,6 @@ export class ViewAssignRoleActionComponent {
 
   editUserRoleCollegeMapping(dialog: TemplateRef<any>) {
     const rowData = this.params;
-    console.log(rowData.data);
     this.fetchActiveCollege();
     this.roleService.findUserRoleById(rowData.data.id).subscribe(data => {
       this.userRoleCollegeMapping = data;
