@@ -12,7 +12,7 @@ import {AppComponent} from '../../../app.component';
 })
 export class ViewPendingMemberActionComponent {
 
-  private params: any;
+  params: any;
 
   constructor(private router: Router, private dialogService: NbDialogService, private memberService: MemberService) {
 
@@ -31,7 +31,9 @@ export class ViewPendingMemberActionComponent {
     const rowData = this.params;
     this.memberService.approveOrDecline(rowData.data.id, true).subscribe((data) => {
         if (data.successMessage) {
-          rowData.api.setRowData(this.memberService.findAllPendingMembers());
+          this.memberService.findAllPendingMembers().subscribe(data => {
+            rowData.api.setRowData(data);
+          });
           AppComponent.showToaster(data.successMessage, data.type);
         } else {
           AppComponent.showToaster(data.errorMessage, data.type);

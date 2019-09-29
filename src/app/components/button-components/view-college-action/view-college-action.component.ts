@@ -10,7 +10,7 @@ import {College} from '../../../models/college';
 })
 export class ViewCollegeActionComponent {
 
-  private params: any;
+   params: any;
 
   constructor(private router: Router, private dialogService: NbDialogService) {
 
@@ -29,14 +29,9 @@ export class ViewCollegeActionComponent {
     this.router.navigate(['/page/admin/college/edit/' + rowData.data.id]);
   }
 
-  viewCollegeDetails() {
-    const rowData = this.params;
-    console.log(rowData.data);
-  }
 
-  open(dialog: TemplateRef<College>) {
+  viewCollegeDetails(dialog: TemplateRef<College>) {
     const rowData = this.params;
-    console.log(rowData.data);
     this.dialogService.open(dialog, { context: rowData.data});
   }
 

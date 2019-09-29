@@ -52,6 +52,7 @@ import { ViewCollegeActionComponent } from './components/button-components/view-
 import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule, POSITION, SPINNER } from 'ngx-ui-loader';
 import { ViewPendingMemberActionComponent } from './components/button-components/view-pending-member-action/view-pending-member-action.component';
 import { ViewAssignRoleActionComponent } from './components/button-components/view-assign-role-action/view-assign-role-action.component';
+import { MemberListComponent } from './components/pages/member-list/member-list.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#00bf98',
@@ -99,7 +100,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     DashboardComponent,
     ViewCollegeActionComponent,
     ViewPendingMemberActionComponent,
-    ViewAssignRoleActionComponent
+    ViewAssignRoleActionComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,

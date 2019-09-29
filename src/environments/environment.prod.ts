@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:8080',
-  clientUrl: 'http://localhost:4200',
+  apiUrl: 'http://api.ethiccraft.in/',
+  clientUrl: 'http://www.ethiccraft.in/',
   production: true
 };

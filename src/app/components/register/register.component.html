@@ -84,16 +84,16 @@
             <div class="col-form-select">
               <input
                 nbInput fullWidth
-                placeholder="Contact"
-                formControlName="contact"
+                placeholder="Mobile Number"
+                formControlName="mobileNumber"
                 required>
               <div
-                *ngIf="membershipForm.get('contact').invalid && (membershipForm.get('contact').dirty || membershipForm.get('contact').touched)"
+                *ngIf="membershipForm.get('mobileNumber').invalid && (membershipForm.get('mobileNumber').dirty || membershipForm.get('mobileNumber').touched)"
                 class="validation-msg">
-                <div *ngIf="membershipForm.get('contact').hasError('required')">
+                <div *ngIf="membershipForm.get('mobileNumber').hasError('required')">
                   Please enter your Contact
                 </div>
-                <div *ngIf="membershipForm.get('contact').hasError('pattern')">
+                <div *ngIf="membershipForm.get('mobileNumber').hasError('pattern')">
                   Seems like it is a wrong number
                 </div>
               </div>
@@ -205,6 +205,8 @@
                 [selectOnTab]="true"
                 appendTo="body"
                 placeholder="College"
+                [addTag]="addCustomCollege"
+                (change)="setOtherCollege($event)"
               >
               </ng-select>
               <div
@@ -220,7 +222,7 @@
 
         </nb-card-body>
         <nb-card-footer>
-          <button (click)="register()" nbButton>Register</button>
+          <button style="float: right" (click)="register()" nbButton>Register</button>
         </nb-card-footer>
       </nb-card>
     </form>

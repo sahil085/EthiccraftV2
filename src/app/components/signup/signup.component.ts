@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
   collegeList: College[] = [];
 
 
-  constructor(private router: Router, private route: ActivatedRoute,
+  constructor(public router: Router, private route: ActivatedRoute,
               private signUpService: SignupService, private collegeService: CollegeService,
               private _formBuilder: FormBuilder) {
 
