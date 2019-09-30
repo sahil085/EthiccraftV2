@@ -1,0 +1,36 @@
+<nb-icon title="Approve Member" style="cursor: pointer" (click)="approveMember()" icon="checkmark-outline"></nb-icon>
+<nb-icon title="Member Details" style="cursor: pointer" (click)="viewMemberDetails(dialog)" icon="eye-outline"></nb-icon>
+<ng-template #dialog let-member let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header class="text-center"> | Member Details |</nb-card-header>
+    <nb-card-body style="width: 100%" >
+      <table class="table table-responsive table-bordered">
+        <tbody>
+        <tr>
+          <th>Hobbies</th>
+          <td>{{member.hobbies}}</td>
+        </tr>
+        <tr>
+          <th>Skills</th>
+          <td>{{member.skills}}</td>
+        </tr>
+        <tr>
+          <th>Inspiration Source</th>
+          <td>{{member.inspirationSource}}</td>
+        </tr>
+        <tr>
+          <th>Permanent Address</th>
+          <td>{{member.permanentAddress.address}}</td>
+        </tr>
+        <tr>
+          <th>Present Address</th>
+          <td>{{member.presentAddress.address}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-card-body>
+    <nb-card-footer>
+      <button style="float: right" nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

@@ -1,0 +1,31 @@
+<nb-icon title="Edit College"  style="cursor: pointer" (click)="editCollege()"
+         icon="edit-outline"></nb-icon>
+<nb-icon title="Reference Details" style="cursor: pointer" (click)="viewCollegeDetails(dialog)" icon="eye-outline"></nb-icon>
+<!--<nb-icon title="Delete College" style="cursor: pointer" (click)="open(dialog)" icon="trash-2-outline"></nb-icon>-->
+
+<ng-template #dialog let-college let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header class="text-center">{{college.collegeName}} | Reference List</nb-card-header>
+    <nb-card-body style="">
+      <table class="table table-responsive table-striped">
+        <thead>
+        <tr>
+          <th>Reference Name</th>
+          <th>Reference Contact</th>
+          <th>Reference Designation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reference of college.referenceList">
+          <td>{{reference.name}}</td>
+          <td>{{reference.contact}}</td>
+          <td>{{reference.designation}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </nb-card-body>
+    <nb-card-footer>
+      <button style="float: right" nbButton (click)="ref.close()">Close</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

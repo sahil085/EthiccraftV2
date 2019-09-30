@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  NbButtonModule, NbCardModule, NbContextMenuModule, NbIconModule, NbInputModule,
+  NbButtonModule, NbCardModule, NbContextMenuModule, NbDialogModule, NbIconModule, NbInputModule,
   NbLayoutModule,
   NbMenuModule,
   NbSelectModule,
@@ -47,7 +47,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthHttpInterceptorService} from './services/security/auth-http-interceptor.service';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {NgSelectModule} from '@ng-select/ng-select';
+import {AgGridModule} from 'ag-grid-angular';
+import { ViewCollegeActionComponent } from './components/button-components/view-college-action/view-college-action.component';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule, POSITION, SPINNER } from 'ngx-ui-loader';
+import { ViewPendingMemberActionComponent } from './components/button-components/view-pending-member-action/view-pending-member-action.component';
+import { ViewAssignRoleActionComponent } from './components/button-components/view-assign-role-action/view-assign-role-action.component';
+import { MemberListComponent } from './components/pages/member-list/member-list.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsColor: '#00bf98',
@@ -92,7 +97,11 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     KeysPipe,
     PendingMembersComponent,
     AccessDeniedComponent,
-    DashboardComponent
+    DashboardComponent,
+    ViewCollegeActionComponent,
+    ViewPendingMemberActionComponent,
+    ViewAssignRoleActionComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,
@@ -114,11 +123,18 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NbSidebarModule.forRoot(),
     NgSelectModule,
     NbUserModule,
+    NbDialogModule.forRoot({}),
+    AgGridModule.forRoot({}),
     NbContextMenuModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgxUiLoaderRouterModule.forRoot({showForeground: true}),
     NgxUiLoaderHttpModule.forRoot({showForeground: true}),
     NbToggleModule
+  ],
+  entryComponents: [
+    ViewCollegeActionComponent,
+    ViewPendingMemberActionComponent,
+    ViewAssignRoleActionComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

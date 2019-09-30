@@ -26,12 +26,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: AppUrl.REGISTER_MEMBER,
       },
       {
+        title: 'Quick Membership',
+        link: AppUrl.SHORT_MEMBERSHIP_FORM,
+      },
+      {
         title: 'Pending Member List',
         link: AppUrl.PENDING_MEMBER_REQUEST,
       },
       {
         title: 'Member List',
-        link: AppUrl.VIEW_MEMBER_CA,
+        link: AppUrl.VIEW_MEMBER,
       }
     ],
   },

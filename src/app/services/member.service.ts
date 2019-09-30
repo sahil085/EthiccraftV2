@@ -20,7 +20,13 @@ export class MemberService {
   findAllPendingMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(`${this.apiUrl}/member/pending-members/${UserService.getCurrentRole()}`);
   }
+   findAll(): Observable<Member[]> {
+     return this.http.get<Member[]>(`${this.apiUrl}/member/findAll/${UserService.getCurrentRole()}`);
+   }
 
+   quickRegister(membershipFormCO): Observable<CommonResponse> {
+    return this.http.post<CommonResponse>(`${this.apiUrl}/member/quick-register`, membershipFormCO);
+   }
   findAttendanceAllMembersOfCA(): Observable<MemberAttendance[]> {
     return this.http.get<MemberAttendance[]>(`${this.apiUrl}/ca/member/findAll`);
   }

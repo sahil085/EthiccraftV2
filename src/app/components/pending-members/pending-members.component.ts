@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Member} from '../../models/member';
 import {AppComponent} from '../../app.component';
 import {MemberService} from '../../services/member.service';
+import {ViewPendingMemberActionComponent} from '../button-components/view-pending-member-action/view-pending-member-action.component';
 
 declare let $: any;
 
@@ -12,7 +13,9 @@ declare let $: any;
 })
 export class PendingMembersComponent implements OnInit {
 
-
+  columnDefs: any;
+  private gridApi;
+  private gridColumnApi;
   membersList: Member[] = [];
 
   constructor(public memberService: MemberService, private appComponent: AppComponent) {
@@ -20,6 +23,7 @@ export class PendingMembersComponent implements OnInit {
 
   ngOnInit() {
     this.findAllPendingMembers();
+    this.createGrid();
   }
 
   findAllPendingMembers() {
@@ -29,24 +33,56 @@ export class PendingMembersComponent implements OnInit {
       }
       ,
       err => {
-        // AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+        AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
       }
     );
   }
 
-  approveOrDeclineMember(member: Member, approveStatus: boolean) {
-    this.memberService.approveOrDecline(member.id, approveStatus).subscribe((data) => {
-        if (data.successMessage) {
-          // AppComponent.showToaster(data.successMessage, data.type);
-          member.memberApproved = approveStatus;
-        } else {
-          // AppComponent.showToaster(data.errorMessage, data.type);
-        }
+
+  createGrid() {
+    this.columnDefs = [
+      {
+        headerName: 'Name', field: 'fullName',
+        cellRenderer: function (params) {
+          if (!params.data) {
+            return '';
+          } else {
+            return params.data.firstName + ' ' + params.data.middleName + ' ' + params.data.lastName;
+          }
+
+        },
+        sortable: true, filter: true
       },
-      err => {
-        // AppComponent.showToaster(err['error'].message ? err['error'].message : err['error'].text, 'error');
+      {headerName: 'Email ID', field: 'email', sortable: true, filter: true},
+      {headerName: 'Mobile Number', field: 'mobileNumber', sortable: true, filter: true},
+      {headerName: 'Course', field: 'courseName', sortable: true, filter: true},
+      {headerName: 'Batch', field: 'batch', sortable: true, filter: true},
+      {headerName: 'College', field: 'college.collegeName', sortable: true, filter: true},
+      {headerName: 'Un-Registered College', field: 'unRegisteredCollege', sortable: true, filter: true},
+      {
+        headerName: 'Actions',
+        field: 'action',
+        cellRendererFramework: ViewPendingMemberActionComponent
       }
-    );
+    ];
   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    params.api.sizeColumnsToFit();
+    params.api.setGridAutoHeight(true);
+
+    window.addEventListener('resize', function () {
+      setTimeout(function () {
+        params.api.sizeColumnsToFit();
+        params.api.setGridAutoHeight(true);
+
+      });
+    });
+  }
+
+
+
 
 }

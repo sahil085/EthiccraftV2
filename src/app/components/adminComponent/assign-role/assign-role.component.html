@@ -22,7 +22,7 @@
             *ngIf="assignRoleForm.get('username').invalid && (assignRoleForm.get('username').dirty || assignRoleForm.get('username').touched)"
             class="validation-msg">
             <div *ngIf="assignRoleForm.get('username').hasError('required')">
-              Please select any username
+              Please select a username
             </div>
             <div *ngIf="assignRoleForm.get('username').hasError('email')">
               Username must be a valid email id
@@ -47,7 +47,7 @@
             *ngIf="assignRoleForm.get('userRole').invalid && (assignRoleForm.get('userRole').dirty || assignRoleForm.get('userRole').touched)"
             class="validation-msg">
             <div *ngIf="assignRoleForm.get('userRole').hasError('required')">
-              Please select any role
+              Please select a role
             </div>
           </div>
         </div>
@@ -87,111 +87,22 @@
   </nb-card-body>
 </nb-card>
 
-
-<!--&lt;!&ndash;See it later&ndash;&gt;-->
-
-<!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-<!--&lt;!&ndash;  <div class="col-lg-12">&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="ibox float-e-margins">&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="ibox-title">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h5>User Role</h5>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        <div class="ibox-tools">&ndash;&gt;-->
-<!--&lt;!&ndash;          <a class="collapse-link">&ndash;&gt;-->
-<!--&lt;!&ndash;            <i class="fa fa-chevron-up"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;          </a>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;      <div class="ibox-content">&ndash;&gt;-->
-<!--&lt;!&ndash;        <table id="viewUserRoleTable" class="table table-responsive table-striped">&ndash;&gt;-->
-<!--&lt;!&ndash;          <thead>&ndash;&gt;-->
-<!--&lt;!&ndash;          <tr>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th>User Name</th>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th>User Email</th>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th>Role</th>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th>Colleges</th>&ndash;&gt;-->
-<!--&lt;!&ndash;            <th>Action</th>&ndash;&gt;-->
-<!--&lt;!&ndash;          </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;          </thead>&ndash;&gt;-->
-<!--&lt;!&ndash;          <tbody>&ndash;&gt;-->
-<!--&lt;!&ndash;          <tr class="p-h-md" *ngFor="let userRole of userRoleCollegeMappingList">&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{userRole.userName}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{userRole.userEmail}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>{{userRole.role}}</td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>&ndash;&gt;-->
-<!--&lt;!&ndash;              {{userRole.collegeName}}&ndash;&gt;-->
-<!--&lt;!&ndash;            </td>&ndash;&gt;-->
-<!--&lt;!&ndash;            <td>&ndash;&gt;-->
-<!--&lt;!&ndash;              <a title="Delete activity" (click)="deleteUserRole(userRole.id)"><i class="fa fa-trash p-xs"></i></a>&ndash;&gt;-->
-<!--&lt;!&ndash;              <a *ngIf="userRole.collegeName && roleCA !== userRole.role"  (click)="editUserRoleMapping(userRole.id)" title="Edit user role"><i class="fa fa-pencil p-xs"></i></a>&ndash;&gt;-->
-<!--&lt;!&ndash;            </td>&ndash;&gt;-->
-<!--&lt;!&ndash;          </tr>&ndash;&gt;-->
-<!--&lt;!&ndash;          </tbody>&ndash;&gt;-->
-<!--&lt;!&ndash;        </table>&ndash;&gt;-->
-
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;&lt;!&ndash; Modal &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;<div id="myModal" class="modal fade" role="dialog">&ndash;&gt;-->
-<!--&lt;!&ndash;  <div class="modal-dialog">&ndash;&gt;-->
-
-<!--&lt;!&ndash;    &lt;!&ndash; Modal content&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;    <div class="modal-content">&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="modal-header">&ndash;&gt;-->
-<!--&lt;!&ndash;        <button type="button" class="close" data-dismiss="modal">&times;</button>&ndash;&gt;-->
-<!--&lt;!&ndash;        <h4 class="modal-title">Update User Role College Mapping</h4>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="modal-body">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="row">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="col-lg-12">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="ibox float-e-margins">&ndash;&gt;-->
-
-<!--&lt;!&ndash;              <div class="ibox-content">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <div class="row">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <div class="col-md-12">&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;<ng-select [multiple]="true" [(ngModel)]="selectedCars">&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;<ng-option *ngFor="let car of cars" [value]="car.id" [disabled]="car.disabled">{{car.name}}</ng-option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;<ng-option [value]="'custom'">Custom</ng-option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;</ng-select>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    <label for="updateUserRoleCollegeMapping">Colleges</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <nb-select id="updateUserRoleCollegeMapping" required [(ngModel)]="updateColleges" [multiple]="true">&ndash;&gt;-->
-<!--&lt;!&ndash;                      <nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </nb-select>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <h3 class="red-bg font-bold" *ngIf="updateColleges.length === 0">Required field</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;<select id="updateUserRoleCollegeMapping"  required class="chosen-select" label="" multiple >&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;<option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;</select>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                  &lt;!&ndash;<form>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;<mat-form-field >&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;<label>Colleges</label>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;<nb-select [formControl]="updateCollegeList" multiple>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                        &lt;!&ndash;<nb-option *ngFor="let college of collegeList" [value]="college.id">{{college.collegeName}}</nb-option>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                      &lt;!&ndash;</nb-select>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                    &lt;!&ndash;&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;                  &lt;!&ndash;</form>&ndash;&gt;&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      <div class="modal-footer">&ndash;&gt;-->
-<!--&lt;!&ndash;        <button class="btn btn-sm btn-primary submitAssignRole" type="submit" (click)="update()">&ndash;&gt;-->
-<!--&lt;!&ndash;          <strong>Update</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;        </button>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;  </div>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<nb-card>
+  <nb-card-header> User Role List </nb-card-header>
+  <nb-card-body>
+    <ag-grid-angular
+      class="ag-theme-balham"
+      style=" width: 100%;"
+      [pagination]="true"
+      [rowData]="userRoleCollegeMappingList"
+      [columnDefs]="columnDefs"
+      [animateRows]="true"
+      [enableCellChangeFlash]="true"
+      (gridReady)="onGridReady($event)"
+    >
+    </ag-grid-angular>
+  </nb-card-body>
+</nb-card>
 
 
 

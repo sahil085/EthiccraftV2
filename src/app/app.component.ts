@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import alert from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import {NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServi
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'neb-theme';
   currentTheme = 'default';
   isLoggedIn = true;
@@ -28,6 +30,14 @@ export class AppComponent {
       name: 'Corporate',
     },
   ];
+
+  public static showToaster = (message, type) => {
+    alert.fire({
+      title: message,
+      type: type
+    });
+  }
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
@@ -38,4 +48,6 @@ export class AppComponent {
     this.themeService.changeTheme(themeName);
     this.isLoggedIn = !this.isLoggedIn;
   }
+
+
 }
