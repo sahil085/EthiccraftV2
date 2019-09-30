@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     });
 
 
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/page/pending-members';
     if (this.authService.isUserLoggedIn()) {
       this.router.navigate([this.returnUrl]);
     }
