@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
   currentTheme = 'default';
 
-  userMenu = [{title: 'Profile'}, {title: 'Log out',  data: { id: 'logout' }}];
+  userMenu = [{title: 'Log out',  data: { id: 'logout' }}];
   user: User = new User();
 
   constructor(private sidebarService: NbSidebarService,
