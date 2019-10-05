@@ -51,18 +51,19 @@ export class PendingMembersComponent implements OnInit {
           }
 
         },
-        sortable: true, filter: true
+        sortable: true, filter: true, resizable: true
       },
-      {headerName: 'Email ID', field: 'email', sortable: true, filter: true},
-      {headerName: 'Mobile Number', field: 'mobileNumber', sortable: true, filter: true},
-      {headerName: 'Course', field: 'courseName', sortable: true, filter: true},
-      {headerName: 'Batch', field: 'batch', sortable: true, filter: true},
-      {headerName: 'College', field: 'college.collegeName', sortable: true, filter: true},
-      {headerName: 'Un-Registered College', field: 'unRegisteredCollege', sortable: true, filter: true},
+      {headerName: 'Email ID', field: 'email', sortable: true, filter: true, resizable: true},
+      {headerName: 'Mobile Number', field: 'mobileNumber', sortable: true, filter: true, resizable: true},
+      {headerName: 'Course', field: 'courseName', sortable: true, filter: true, resizable: true},
+      {headerName: 'Batch', field: 'batch', sortable: true, filter: true, resizable: true},
+      {headerName: 'College', field: 'college.collegeName', sortable: true, filter: true, resizable: true},
+      {headerName: 'Un-Registered College', field: 'unRegisteredCollege', sortable: true, filter: true, resizable: true},
       {
         headerName: 'Actions',
         field: 'action',
-        cellRendererFramework: ViewPendingMemberActionComponent
+        cellRendererFramework: ViewPendingMemberActionComponent,
+        resizable: true
       }
     ];
   }

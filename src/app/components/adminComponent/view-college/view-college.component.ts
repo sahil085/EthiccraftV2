@@ -43,15 +43,16 @@ this.createGrid();
 
   createGrid() {
     this.columnDefs = [
-      {headerName: 'College Name', field: 'collegeName', sortable: true, filter: true},
-      {headerName: 'College Abbreviation', field: 'collegeAbbreviation', sortable: true, filter: true},
-      {headerName: 'Faculty', field: 'faculty', sortable: true, filter: true},
-      {headerName: 'State', field: 'state', sortable: true, filter: true},
-      {headerName: 'City', field: 'city', sortable: true, filter: true},
+      {headerName: 'College Name', field: 'collegeName', sortable: true, filter: true, resizable: true},
+      {headerName: 'College Abbreviation', field: 'collegeAbbreviation', sortable: true, filter: true, resizable: true},
+      {headerName: 'Faculty', field: 'faculty', sortable: true, filter: true, resizable: true},
+      {headerName: 'State', field: 'state', sortable: true, filter: true, resizable: true},
+      {headerName: 'City', field: 'city', sortable: true, filter: true, resizable: true},
       {
         headerName: 'Actions',
         cellRendererFramework: ViewCollegeActionComponent,
-        field: 'action'
+        field: 'action',
+        resizable: true
       }
     ];
   }

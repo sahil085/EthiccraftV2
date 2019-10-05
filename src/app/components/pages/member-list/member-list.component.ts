@@ -47,7 +47,7 @@ export class MemberListComponent implements OnInit {
           }
 
         },
-        sortable: true, filter: true
+        sortable: true, filter: true, resizable: true
       },
       {headerName: 'Email ID', field: 'email', sortable: true, filter: true, resizable: true},
       {headerName: 'Mobile Number', field: 'mobileNumber', sortable: true, filter: true, resizable: true},

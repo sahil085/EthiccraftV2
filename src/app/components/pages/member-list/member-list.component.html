@@ -4,6 +4,8 @@
     <ag-grid-angular
       class="ag-theme-balham"
       style=" width: 100%;"
+      [enableRangeSelection]="true"
+      [paginationPageSize]="20"
       [pagination]="true"
       [rowData]="membersList"
       [columnDefs]="columnDefs"
