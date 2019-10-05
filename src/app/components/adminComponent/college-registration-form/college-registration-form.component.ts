@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import csc from 'country-state-city';
 import {CollegeService} from '../../../services/college.service';
@@ -34,7 +34,8 @@ export class CollegeRegistrationFormComponent implements OnInit {
               private formBuilder: FormBuilder,
               private collegeService: CollegeService,
               private ngxService: NgxUiLoaderService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.collegeFormGroup = this.formBuilder.group({
@@ -50,7 +51,6 @@ export class CollegeRegistrationFormComponent implements OnInit {
     });
 
     this.stateList = csc.getStatesOfCountry('101');
-
   }
 
   createItem = () => {
@@ -117,14 +117,14 @@ export class CollegeRegistrationFormComponent implements OnInit {
     } else {
       this.collegeFormGroup.markAllAsTouched();
     }
-  }
+  };
 
 
   showToaster = (message, type) => {
     alert.fire({
-      title: message,
+        title: message,
       type: type,
       timer: 1500
     });
-  }
+  };
 }

@@ -2,6 +2,46 @@
 @import "~bootstrap/scss/bootstrap";
 @import '~@nebular/theme/styles/globals';
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/grid';
+@mixin ngx-pace-theme() {
+
+  .pace .pace-progress {
+    background: nb-theme(color-primary-default);
+  }
+
+  .pace .pace-progress-inner {
+    box-shadow: 0 0 10px nb-theme(color-primary-default), 0 0 5px nb-theme(color-primary-default);
+  }
+
+  .pace .pace-activity {
+    display: none;
+  }
+}
+
+@mixin ngx-layout() {
+  @include media-breakpoint-down(is) {
+    .row {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+}
+
+@import './themes';
+
+@mixin nb-overrides() {
+  nb-select.size-medium button {
+    padding: 0.4375rem 2.2rem 0.4375rem 1.125rem !important;
+
+    nb-icon {
+      right: 0.41rem !important;
+    }
+  }
+}
+
 @include nb-install() {
   @include nb-theme-global();
 }

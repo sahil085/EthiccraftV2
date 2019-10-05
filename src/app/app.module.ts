@@ -11,7 +11,8 @@ import {
   NbSelectModule,
   NbSidebarModule,
   NbStepperModule,
-  NbThemeModule, NbToggleModule, NbUserModule
+  NbToggleModule, NbUserModule,
+  NbThemeModule, NbTreeGridModule
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {LoginComponent} from './components/login/login.component';
@@ -119,6 +120,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NbCardModule,
     HttpClientModule,
     NbIconModule,
+    NbTreeGridModule,
     NbMenuModule.forRoot(),
     NbSidebarModule.forRoot(),
     NgSelectModule,
