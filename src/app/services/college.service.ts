@@ -14,7 +14,6 @@ export class CollegeService {
   constructor(private http: HttpClient) { }
 
   public registerCollege(collegeCO) {
-    console.log(collegeCO);
     return this.http.post(`${this.collegeApiUrl}/register`, collegeCO);
   }
 
